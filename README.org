@@ -76,4 +76,4 @@ If you enjoy using Casual Dired, consider making a modest financial contribution
 [[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
 
 * Acknowledgments
-A heartfelt thanks to all the contributors to Calc and Transit. Casual would not be possible without your efforts.
+A heartfelt thanks to all the contributors to Dired and Transit. Casual Dired would not be possible without your efforts.
