@@ -25,40 +25,41 @@ else
   EXEC_NAME=emacs
 endif
 
-CASUAL_INCLUDES=casual-dired-sort-by.el
-CASUAL_PACKAGES=casual-dired-version.el
-CASUAL_TEST_INCLUDES=casual-test-utils.el
+ELISP_INCLUDES=casual-dired-sort-by.el
+ELISP_PACKAGES=casual-dired-version.el
+ELISP_TEST_INCLUDES=casual-dired-test-utils.el
+PACKAGE_NAME=casual-dired
 
 .PHONY: tests compile regression
 
 .SUFFIXES: .el .elc .elt
 
 .el.elc :
-	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(CASUAL_INCLUDES)) \
+	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(ELISP_INCLUDES)) \
 -f batch-byte-compile $<
 
 .el.elt :
-	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(CASUAL_INCLUDES)) \
+	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(ELISP_INCLUDES)) \
 -l $< \
--l $(patsubst %, ../tests/%, $(CASUAL_TEST_INCLUDES)) \
+-l $(patsubst %, ../tests/%, $(ELISP_TEST_INCLUDES)) \
 -l $(patsubst %, ../tests/test-%, $<) \
 -f ert-run-tests-batch-and-exit
 
-tests: $(CASUAL_PACKAGES:.el=.elt) $(CASUAL_INCLUDES:.el=.elt) casual-dired.elt
+tests: $(ELISP_PACKAGES:.el=.elt) $(ELISP_INCLUDES:.el=.elt) $(PACKAGE_NAME).elt
 
-compile: $(CASUAL_PACKAGES:.el=.elc) $(CASUAL_INCLUDES:.el=.elc) casual-dired.elc
+compile: $(ELISP_PACKAGES:.el=.elc) $(ELISP_INCLUDES:.el=.elc) $(PACKAGE_NAME).elc
 
-casual-dired.elc: casual-dired.el
-	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(CASUAL_INCLUDES)) \
-$(patsubst %, -l %, $(CASUAL_PACKAGES)) \
+$(PACKAGE_NAME).elc: $(PACKAGE_NAME).el
+	$(EXEC_NAME) -Q --batch $(patsubst %, -l %, $(ELISP_INCLUDES)) \
+$(patsubst %, -l %, $(ELISP_PACKAGES)) \
 -f batch-byte-compile $<
 
-casual-dired.elt: casual-dired.el
+$(PACKAGE_NAME).elt: $(PACKAGE_NAME).el
 	$(EXEC_NAME) -Q --batch \
-$(patsubst %, -l %, $(CASUAL_INCLUDES)) \
-$(patsubst %, -l %, $(CASUAL_PACKAGES)) \
+$(patsubst %, -l %, $(ELISP_INCLUDES)) \
+$(patsubst %, -l %, $(ELISP_PACKAGES)) \
 -l $< \
--l ../tests/casual-test-utils.el \
+-l ../tests/$(ELISP_TEST_INCLUDES) \
 -l $(patsubst %, ../tests/test-%, $<) \
 -f ert-run-tests-batch-and-exit
 
