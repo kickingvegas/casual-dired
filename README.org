@@ -1,10 +1,10 @@
 * Casual Dired
 An opinionated [[https://github.com/magit/transient][Transient]]-based porcelain to support the casual usage of Emacs [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
 
-/insert screen shot/
+/insert screen shots/
 
 * Motivation
-While highly functional, Dired has a steep learning curve as it relies on single-key bindings for many of its commands. Menus are a user interface (UI) affordance that offer users discoverability and recall that can lower Dired's learning curve. While menus are commonly associated with mouse-driven UI, the inclusion of Transient in Emacs core allows for building a keyboard-driven menu UI which many users prefer. Casual Dired endeavors to offer this.
+While highly functional, Dired has a steep learning curve as it relies on single-key bindings for many of its commands. Menus are a user interface (UI) affordance that offer users discoverability and recall that can lower Dired's learning curve. While menus are commonly associated with mouse-driven UI, the inclusion of Transient in Emacs core allows for a menu UI that is keyboard-driven. Casual Dired endeavors to offer this as many Emacs users prefer keyboard-driven workflows.
 
 ** Goals
 - To provide a keyboard-driven menu UI to Dired.
@@ -13,15 +13,27 @@ While highly functional, Dired has a steep learning curve as it relies on single
 ** Non-Goals
 - Full coverage of all Dired commands. Casual Dired is not intended to be a power user tool.
 - Strict adherence to default Dired keybindings. That said, most Dired keybindings are honored.
-- Strict adherence to Dired command naming. While Casual Dired is mostly in alignment with Dired’s command naming, there are cases where it will make an opinionated change if the name is deemed too vague or idiomatic.
+- Strict adherence to Dired command naming. While Casual Dired is *mostly* in alignment with Dired’s command naming, there are cases where it will make an opinionated change if the name is deemed too vague or idiomatic.
 - UX Stability (for now). Given that Casual Dired is early in its life-cycle, expect changes to its user experience in terms of menu hierarchy and keybinding choices in future releases.
 
+* Requirements
+
+Casual Dired has been verified with the following configuration. 
+- Emacs 29.3 (macOS 14.4.1, Ubuntu Linux 22.04.4 LTS)
+- GNU ~ls~ (coreutils 9.5)
+- ImageMagick ~identify~ (ImageMagick 6.9.13)
+
+The Casual Dired /sort by/ feature relies on the installation of GNU ~ls~. The Casual Dired /Image Info/ feature relies on the ~indentify~ CLI utility. Both programs must be configured (typically via ~PATH~) so that they are available to Emacs. There is no checking by Casual Dired to verify that either the aforementioned utilities are installed.
+
+Users with earlier versions of GNU coreutils and ImageMagick may still be able to use Casual Dired.
+
 * Asks
-As Casual Dired is new, we are looking for early adopters! Your [[https://github.com/kickingvegas/Casual/issues][feedback]] is welcome as it will likely impact Casual Dired's evolution, particularly with regards to UI.
+As Casual Dired is new, we are looking for early adopters! Your [[https://github.com/kickingvegas/casual-dired/issues][feedback]] is welcome as it will likely impact Casual Dired's evolution, particularly with regards to UI.
 
 * Install
 If installed via ~list-packages~ then add this line to your Emacs initialization file.
 #+begin_src elisp :lexical no
+  (require 'casual-dired)
   (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
 #+end_src
 
@@ -39,11 +51,70 @@ If you are installing by using a clone of this repository, then ensure that the 
   (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
 #+end_src
 
+
+Included is a standard keymap for Dired sorting commands (~casual-dired-sort-menu~) which can be included in a context menu for a mouse-driven workflow.
+
+
+#+begin_src elisp :lexical no
+  (easy-menu-add-item menu nil casual-dired-sort-menu)
+#+end_src
+
 Casual requires Emacs 29.1+.
 
 * Usage
 1. Invoke ~M-x dired~ to launch Dired.
 2. When the point is in the Dired window, invoke ~C-o~ (or a binding of your choosing) to launch the Casual Dired menu.
+
+* Configuration
+
+As Dired has been around for a long time, the different ways of configuring it are myriad. Described below is the configuration used by the author to illustrate the use of Casual Dired.
+
+** Initialization
+
+#+begin_src elisp :lexical no
+  (require 'dired)
+  (require 'dired-x)
+  (require 'cclisp)
+  (require 'wdired)
+  (require 'image-dired)
+  (require 'casual-dired)
+
+  (add-hook 'dired-mode-hook 'hl-line-mode)
+  (add-hook 'dired-mode-hook 'context-menu-mode)
+  (add-hook 'dired-mode-hook 'dired-async-mode)
+  (add-hook
+   'dired-mode-hook
+   (lambda ()
+     (setq-local mouse-1-click-follows-link 'double)))
+
+  (define-key dired-mode-map (kbd "M-o") #'dired-omit-mode)
+  (define-key dired-mode-map (kbd "E") #'wdired-change-to-wdired-mode)
+  (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
+  (define-key dired-mode-map (kbd "s") #'casual-dired-sort-by-tmenu)
+  (define-key dired-mode-map (kbd "M-n") #'dired-next-dirline)
+  (define-key dired-mode-map (kbd "M-p") #'dired-prev-dirline)
+  (define-key dired-mode-map (kbd "]") #'dired-next-subdir)
+  (define-key dired-mode-map (kbd "[") #'dired-prev-subdir)
+  (define-key dired-mode-map (kbd "A-M-<mouse-1>") #'browse-url-of-dired-file)
+
+  (define-key image-dired-thumbnail-mode-map (kbd "n") #'image-dired-display-next)
+  (define-key image-dired-thumbnail-mode-map (kbd "p") #'image-dired-display-previous)
+  
+#+end_src
+
+** Variables
+
+dired-use-ls-dired
+
+ls-lisp-use-insert-directory-program
+
+
+| dired-use-ls-dired           | t                                           |
+| dired-auto-revert-buffer     | t                                           |
+| dired-dwim-target            | 'dired-dwim-target-next                     |
+| dired-guess-shell-alist-user | '(("" "open"))                              |
+| dired-listing-switches       | "-lh  --time-style=long-iso --sort=version" |
+| dired-mouse-drag-files       | t                                           |
 
 * Common Menu Actions
 Casual Dired is built using Transient menus and as such adopts much of its default behavior.
