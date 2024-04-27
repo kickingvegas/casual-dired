@@ -109,6 +109,7 @@
 
   [["Quick"
     ("j" "Jump to Bookmark…" bookmark-jump :transient nil)
+    ("B" "Add Bookmark…" bookmark-set-no-overwrite :transient nil)
     ("b" "List Buffers" ibuffer :transient nil)]
 
    ["Search"
