@@ -71,6 +71,7 @@
     ;;(push (casualt-suffix-test-vector "]" #'dired-next-subdir) test-vectors)
 
     (push (casualt-suffix-test-vector "j" #'bookmark-jump) test-vectors)
+    (push (casualt-suffix-test-vector "B" #'bookmark-set-no-overwrite) test-vectors)
     (push (casualt-suffix-test-vector "b" #'ibuffer) test-vectors)
 
     ;;(push (casualt-suffix-test-vector "" dired-isearch-filenames) test-vectors)

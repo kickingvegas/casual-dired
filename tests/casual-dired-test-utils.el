@@ -50,11 +50,11 @@ This function creates a testbench to exercise a menu item
 command (Transient suffix) in a menu (prefix). The command
 associated with that binding is overridden to instead push a
 value to the top of the Calc stack. This value is then tested."
-  (defun casualt-stub (&optional arg0 arg1 arg2 arg3 arg4 arg5)
+  (defun casualt-stub (&rest _)
     (number-to-register value ?9))
 
   (advice-add cmd :override #'casualt-stub)
-  (funcall menu)
+  (funcall-interactively menu)
   (execute-kbd-macro binding)
   (should (equal value (get-register ?9)))
   (advice-remove cmd #'casualt-stub))
