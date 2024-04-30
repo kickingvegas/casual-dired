@@ -240,7 +240,53 @@ See the man page `ls(1)' for details."
      (t
       (message "Default sorted by name")))
 
-    (dired-sort-other (mapconcat 'identity arg-list " "))))
+    (dired-sort-other (mapconcat 'identity arg-list " "))
+    (casual-dired--update-mode-name criteria (member "--reverse" arg-list))))
+
+(defun casual-dired--update-mode-name (criteria reverse)
+  "Update Dired `mode-name' given CRITERIA and REVERSE.
+
+Update the value of `mode-name' as part of the sort operation
+done by `casual-dired-sort-by'.
+
+- CRITERIA: sort criteria key
+- REVERSE: if non-nil then buffer sorted with the --reverse argument"
+  (unless (derived-mode-p 'dired-mode)
+    (error "Not in Dired mode"))
+
+  (setq mode-name (casual-dired--mode-name-from-sort criteria reverse))
+  (force-mode-line-update))
+
+(defun casual-dired--mode-name-from-sort (criteria reverse)
+  "Generate Dired `mode-name' given CRITERIA and REVERSE.
+
+Generate the value of `mode-name' as part of the sort operation
+done by `casual-dired-sort-by'.
+
+- CRITERIA: sort criteria key
+- REVERSE: if non-nil then --reverse argument is used"
+  (let* ((invert-reverse (member criteria '(:date-last-opened
+                                            :date-added
+                                            :date-modified
+                                            :date-metadata-changed
+                                            :size)))
+         (reverse-icon (if (xor reverse invert-reverse) "↑" "↓"))
+         (base-name "Dired")
+         (template (concat base-name ": %s " reverse-icon))
+         (new-mode-name (list)))
+
+    (cond
+     ((eq criteria :name) (push (format template "name") new-mode-name))
+     ((eq criteria :kind) (push (format template "kind") new-mode-name))
+     ((eq criteria :date-last-opened) (push (format template "last") new-mode-name))
+     ((eq criteria :date-added) (push (format template "added") new-mode-name))
+     ((eq criteria :date-modified) (push (format template "modified") new-mode-name))
+     ((eq criteria :date-metadata-changed) (push (format template "Δ metadata") new-mode-name))
+     ((eq criteria :version) (push (format template "version") new-mode-name))
+     ((eq criteria :size) (push (format template "size") new-mode-name))
+     (t (push base-name new-mode-name)))
+
+    new-mode-name))
 
 (easy-menu-define casual-dired-sort-menu nil
   "Keymap for Dired sort by menu."

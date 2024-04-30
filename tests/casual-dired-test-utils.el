@@ -33,7 +33,7 @@
   (dired "/tmp"))
 
 (defun casualt-breakdown (&optional clear)
-  "Casual menu test breakdown function, if CLEAR is non-nil then clear stack."
+  "Casual menu test breakdown function, if CLEAR is non-nil then clear state."
   )
 
 (defun casualt-testbench-transient-suffix (menu binding cmd value)
