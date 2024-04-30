@@ -25,6 +25,7 @@
 ;;; Code:
 (require 'transient)
 (require 'dired)
+(require 'casual-dired-variables)
 
 ;;; Menus
 (transient-define-prefix casual-dired-settings-tmenu ()
@@ -39,8 +40,11 @@
     ("t" "Target Directory"
      casual-dired--customize-dired-dwim-target
      :transient nil)
-    ("s" "Listing Switches"
+    ("s" "Dired Listing Switches"
      casual-dired--customize-dired-listing-switches
+     :transient nil)
+    ("c" "Casual Listing Switches"
+     casual-dired--customize-casual-dired-listing-switches
      :transient nil)
     ("d" "Dired Group"
      casual-dired--customize-dired-group
@@ -87,10 +91,17 @@ Switches passed to ‘ls’ for Dired.  MUST contain the ‘l’ option."
   (interactive)
   (customize-variable 'dired-listing-switches))
 
+(defun casual-dired--customize-casual-dired-listing-switches ()
+  "Customize `casual-dired-listing-switches'.
+
+Customizes switches that are enabled by the Casual “Dired Sort” By menu."
+  (interactive)
+  (customize-variable 'casual-dired-listing-switches))
+
 (defun casual-dired--customize-dired-group ()
   "Call the Dired customization group."
   (interactive)
-  (customize-group 'Dired))
+  (customize-group "dired"))
 
 (defun casual-dired-about-dired ()
   "Casual is an opinionated porcelain for Emacs Dired.

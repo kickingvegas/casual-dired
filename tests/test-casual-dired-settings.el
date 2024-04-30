@@ -35,6 +35,7 @@
     (push (casualt-suffix-test-vector "r" #'casual-dired--customize-dired-auto-revert-buffer) test-vectors)
     (push (casualt-suffix-test-vector "t" #'casual-dired--customize-dired-dwim-target) test-vectors)
     (push (casualt-suffix-test-vector "s" #'casual-dired--customize-dired-listing-switches) test-vectors)
+    (push (casualt-suffix-test-vector "c" #'casual-dired--customize-casual-dired-listing-switches) test-vectors)
     (push (casualt-suffix-test-vector "d" #'casual-dired--customize-dired-group) test-vectors)
     (push (casualt-suffix-test-vector "a" #'casual-dired-about) test-vectors)
 
