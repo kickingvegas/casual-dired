@@ -38,6 +38,7 @@
     (push (casualt-suffix-test-vector "c" #'casual-dired--customize-casual-dired-listing-switches) test-vectors)
     (push (casualt-suffix-test-vector "d" #'casual-dired--customize-dired-group) test-vectors)
     (push (casualt-suffix-test-vector "a" #'casual-dired-about) test-vectors)
+    (push (casualt-suffix-test-vector "v" #'casual-dired-version) test-vectors)
 
     (casualt-suffix-testbench-runner test-vectors
                                      #'casual-dired-settings-tmenu

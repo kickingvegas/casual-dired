@@ -26,6 +26,7 @@
 (require 'transient)
 (require 'dired)
 (require 'casual-dired-variables)
+(require 'casual-dired-version)
 
 ;;; Menus
 (transient-define-prefix casual-dired-settings-tmenu ()
@@ -52,6 +53,7 @@
   [""
    :class transient-row
    ("a" "About" casual-dired-about :transient nil)
+   ("v" "Version" casual-dired-version :transient nil)
    ("q" "Dismiss" ignore :transient transient--do-exit)])
 
 ;;; Functions
