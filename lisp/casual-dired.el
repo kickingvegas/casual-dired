@@ -40,6 +40,7 @@
 (require 'casual-dired-settings)
 
 ;;; Menus
+;;;###autoload (autoload 'casual-dired-tmenu "casual-dired" nil t)
 (transient-define-prefix casual-dired-tmenu ()
   "Transient menu for Dired."
   ["Dired"

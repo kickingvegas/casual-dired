@@ -49,25 +49,13 @@
 (require 'transient)
 (require 'easymenu)
 (require 'mouse)
-
-(defcustom casual-dired-listing-switches '("--human-readable"
-                                           "--group-directories-first"
-                                           "--time-style=long-iso")
-  "List of GNU ls arguments used by the function `casual-dired--sort-by'.
-
-This variable requires GNU ls from coreutils installed.\n
-See the man page `ls(1)' for details."
-  :type '(repeat string)
-  :group 'dired)
+(require 'casual-dired-variables)
 
 (transient-define-prefix casual-dired-sort-by-tmenu ()
   "Transient menu to sort Dired buffer by different criteria.
 
 This function requires GNU ls from coreutils installed."
-  :value '("--human-readable"
-           "--group-directories-first"
-           "--time-style=long-iso")
-  ;; TODO: support casual-dired-listing-switches
+  :value casual-dired-listing-switches
   :man-page "ls"
   [["Arguments"
     ("-a" "all" "--all")
@@ -189,7 +177,7 @@ CRITERIA is a keyword of which the following are supported:
   :date-last-opened :date-modified
 
 PREFIX-ARGS is a list of GNU ls arguments. If nil, then it will use the value
-of `cc-dired-listing-switches'. Otherwise this is typically populated by the
+of `casual-dired-listing-switches'. Otherwise this is typically populated by the
 Transient menu `casual-dired-sort-by-tmenu'.
 
 This function requires GNU ls from coreutils installed.
