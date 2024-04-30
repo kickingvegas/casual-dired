@@ -30,7 +30,7 @@
 
 (defun casualt-setup ()
   "Casual menu test setup function."
-  )
+  (dired "/tmp"))
 
 (defun casualt-breakdown (&optional clear)
   "Casual menu test breakdown function, if CLEAR is non-nil then clear stack."
