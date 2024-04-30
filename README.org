@@ -32,7 +32,7 @@ Users with earlier versions of GNU coreutils and ImageMagick may still be able t
 As Casual Dired is new, we are looking for early adopters! Your [[https://github.com/kickingvegas/casual-dired/discussions][feedback]] is welcome as it will likely impact Casual Dired's evolution, particularly with regards to UI.
 
 * Install
-If installed via MELPA then add this line to your Emacs initialization file.
+If installed via MELPA (TBD) then add this line to your Emacs initialization file.
 #+begin_src elisp :lexical no
   (require 'casual-dired)
   (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
