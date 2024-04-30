@@ -22,7 +22,7 @@
 
 ;;; Code:
 
-(defconst casual-dired-version "0.1.0"
+(defconst casual-dired-version "0.1.1-rc.1"
   "Casual Dired Version.")
 
 (defun casual-dired-version ()
