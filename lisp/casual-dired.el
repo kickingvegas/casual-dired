@@ -30,12 +30,14 @@
 ;; (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
 
 ;;; Code:
+(require 'transient)
 (require 'dired)
 (require 'dired-x)
 (require 'wdired)
 (require 'image-dired)
 (require 'casual-dired-sort-by)
 (require 'casual-dired-version)
+(require 'casual-dired-settings)
 
 ;;; Menus
 ;;;###autoload (autoload 'casual-dired-tmenu "casual-dired" nil t)
@@ -56,23 +58,23 @@
 
    ["Directory"
     ("s" "Sort By›" casual-dired-sort-by-tmenu
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if casual-dired-show-sort-by-tmenu-p
      :transient t)
     ("h" "Hide Details" dired-hide-details-mode
      :description
      (lambda ()
        (casual-dired--checkbox-label dired-hide-details-mode "Hide Details"))
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("O" "Omit Mode" dired-omit-mode
      :description
      (lambda () (casual-dired--checkbox-label dired-omit-mode "Omit Mode"))
      :transient t)
     ("i" "Insert Subdir" dired-maybe-insert-subdir
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("$" "Hide/Unhide Subdir" dired-hide-subdir
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("k" "Kill (Hide) Line(s)" dired-do-kill-lines :transient t)
     ("g" "Revert" revert-buffer :transient t)
@@ -96,20 +98,21 @@
     ("p" "↑ 📄" dired-previous-line :transient t)
     ("n" "↓ 📄" dired-next-line :transient t)
     ("M-p" "↑ 📁" dired-prev-dirline
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("M-n" "↓ 📁" dired-next-dirline
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("[" "↑ 🗂️" dired-prev-subdir
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("]" "↓ 🗂️" dired-next-subdir
-     :if-not casual-dired-find-lisp-dired-buffer-p
+     :if-not casual-dired-lisp-dired-buffer-p
      :transient t)]]
 
   [["Quick"
     ("j" "Jump to Bookmark…" bookmark-jump :transient nil)
+    ("B" "Add Bookmark…" bookmark-set-no-overwrite :transient nil)
     ("b" "List Buffers" ibuffer :transient nil)]
 
    ["Search"
@@ -120,8 +123,10 @@
     ("+" "Directory" dired-create-directory :transient t)
     ("F" "File" dired-create-empty-file :transient t)]]
 
-  [:class transient-row
+  [""
+   :class transient-row
    ("<return>" "Open" dired-find-file :transient nil)
+   ("," "Settings" casual-dired-settings-tmenu :transient nil)
    ("q" "Dismiss" ignore :transient transient--do-exit)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()
@@ -172,9 +177,17 @@
       (kill-new output))
     (message "Not an image file.")))
 
-(defun casual-dired-find-lisp-dired-buffer-p ()
-  "Predicate if buffer name is “*Find Lisp Dired*”."
-  (string-equal (buffer-name) "*Find Lisp Dired*"))
+(defun casual-dired-lisp-dired-buffer-p ()
+  "Predicate if buffer name is “*Find Lisp Dired*”.
+
+This buffer is created by the command `find-lisp-find-dired'."
+  (and (derived-mode-p 'dired-mode)
+       (string-equal (buffer-name) "*Find Lisp Dired*")))
+
+(defun casual-dired-show-sort-by-tmenu-p ()
+  "Predicate to show `casual-dired-sort-by-tmenu'."
+  (and (equal dired-use-ls-dired t)
+       (not (casual-dired-lisp-dired-buffer-p))))
 
 (defun casual-dired-find-dired-regexp (REGEXP)
   "Find files in current directory whose names match REGEXP."

@@ -47,6 +47,51 @@
   (casualt-breakdown t))
 
 
+(ert-deftest test-casual-dired--mode-name-from-sort ()
+  (casualt-setup)
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :name nil)) "Dired: name ↓"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :name t)) "Dired: name ↑"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :kind nil)) "Dired: kind ↓"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :kind t)) "Dired: kind ↑"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-last-opened nil)) "Dired: last ↑"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-last-opened t)) "Dired: last ↓"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-added nil)) "Dired: added ↑"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-added t)) "Dired: added ↓"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-modified nil)) "Dired: modified ↑"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-modified t)) "Dired: modified ↓"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-metadata-changed nil)) "Dired: Δ metadata ↑"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :date-metadata-changed t)) "Dired: Δ metadata ↓"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :version nil)) "Dired: version ↓"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :version t)) "Dired: version ↑"))
+
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :size nil)) "Dired: size ↑"))
+  (should (string-equal
+           (car (casual-dired--mode-name-from-sort :size t)) "Dired: size ↓"))
+
+  (casualt-breakdown t))
+
 
 (provide 'test-casual-dired-sort-by)
 ;;; test-casual-dired-sort-by.el ends here
