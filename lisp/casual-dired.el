@@ -94,19 +94,19 @@
 
    ["Navigation"
     :pad-keys t
-    ("^" "᳞ 📁" dired-up-directory :transient t)
-    ("p" "↑ 📄" dired-previous-line :transient t)
-    ("n" "↓ 📄" dired-next-line :transient t)
-    ("M-p" "↑ 📁" dired-prev-dirline
+    ("^" ".. 📁" dired-up-directory :transient t)
+    ("p" " ↑ 📄" dired-previous-line :transient t)
+    ("n" " ↓ 📄" dired-next-line :transient t)
+    ("M-p" " ↑ 📁" dired-prev-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("M-n" "↓ 📁" dired-next-dirline
+    ("M-n" " ↓ 📁" dired-next-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("[" "↑ 🗂️" dired-prev-subdir
+    ("[" " ↑ 🗂️" dired-prev-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("]" "↓ 🗂️" dired-next-subdir
+    ("]" " ↓ 🗂️" dired-next-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)]]
 
