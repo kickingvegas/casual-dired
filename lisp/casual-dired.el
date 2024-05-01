@@ -5,7 +5,7 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.0.0
+;; Version: 1.0.1
 ;; Package-Requires: ((emacs "29.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -94,19 +94,19 @@
 
    ["Navigation"
     :pad-keys t
-    ("^" "᳞ 📁" dired-up-directory :transient t)
-    ("p" "↑ 📄" dired-previous-line :transient t)
-    ("n" "↓ 📄" dired-next-line :transient t)
-    ("M-p" "↑ 📁" dired-prev-dirline
+    ("^" ".. 📁" dired-up-directory :transient t)
+    ("p" " ↑ 📄" dired-previous-line :transient t)
+    ("n" " ↓ 📄" dired-next-line :transient t)
+    ("M-p" " ↑ 📁" dired-prev-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("M-n" "↓ 📁" dired-next-dirline
+    ("M-n" " ↓ 📁" dired-next-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("[" "↑ 🗂️" dired-prev-subdir
+    ("[" " ↑ 🗂️" dired-prev-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
-    ("]" "↓ 🗂️" dired-next-subdir
+    ("]" " ↓ 🗂️" dired-next-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)]]
 
