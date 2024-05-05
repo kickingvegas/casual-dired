@@ -228,7 +228,7 @@ See the man page `ls(1)' for details."
      (t
       (message "Default sorted by name")))
 
-    (dired-sort-other (mapconcat 'identity arg-list " "))
+    (dired-sort-other (mapconcat #'identity arg-list " "))
     (casual-dired--update-mode-name criteria (member "--reverse" arg-list))))
 
 (defun casual-dired--update-mode-name (criteria reverse)
