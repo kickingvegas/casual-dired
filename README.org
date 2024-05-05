@@ -1,5 +1,6 @@
+[[https://melpa.org/#/casual-dired][file:https://melpa.org/packages/casual-dired-badge.svg]]
 * Casual Dired
-An opinionated [[https://github.com/magit/transient][Transient]]-based porcelain to support the casual usage of Emacs [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
+An opinionated [[https://github.com/magit/transient][Transient]]-based porcelain for the Emacs file manager [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
 
 [[file:docs/images/casual-dired-screenshot.png]]
 
@@ -9,7 +10,7 @@ While highly functional, Dired has a steep learning curve as it relies on single
 
 ** Goals
 - To provide a keyboard-driven menu UI to Dired.
-- To provide easy access to common file manager operations.
+- To provide casual access to common file manager operations.
 
 ** Non-Goals
 - Full coverage of all Dired commands. Casual Dired is not intended to be a power user tool.
@@ -148,5 +149,12 @@ If you enjoy using Casual Dired, consider making a modest financial contribution
 
 [[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
 
+* See Also
+If you like Casual Dired, these other projects might interest you:
+
+- [[https://github.com/kickingvegas/cc-isearch-menu][cc-isearch-menu]] - A Transient menu for isearch.
+- [[https://github.com/kickingvegas/casual][Casual]] - an opinionated Transient porcelain for Emacs Calc.
+
 * Acknowledgments
 A heartfelt thanks to all the contributors to Dired and Transit. Casual Dired would not be possible without your efforts.
+
