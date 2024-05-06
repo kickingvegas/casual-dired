@@ -25,6 +25,7 @@
 ;;; Code:
 (require 'transient)
 (require 'dired)
+(require 'wdired)
 (require 'casual-dired-variables)
 (require 'casual-dired-version)
 
@@ -32,26 +33,47 @@
 (transient-define-prefix casual-dired-settings-tmenu ()
   ["Dired Settings"
    ["Customize"
-    ("l" "Uses ls with “--dired”"
-     casual-dired--customize-dired-use-ls-dired
-     :transient nil)
-    ("r" "Revert Behavior"
+     ("T" "Use System Trash Can"
+      casual-dired--customize-delete-by-moving-to-trash
+      :transient nil)
+
+     ("r" "Revert Policy"
      casual-dired--customize-dired-auto-revert-buffer
      :transient nil)
-    ("t" "Target Directory"
-     casual-dired--customize-dired-dwim-target
+     ("t" "Target Directory"
+      casual-dired--customize-dired-dwim-target
+      :transient nil)
+
+     ("u" "Use UTF-8 Symbols"
+     casual-dired--customize-casual-dired-use-utf8-symbols
+     :transient nil)]
+
+    ["GNU ‘ls’"
+     ("l" "Use GNU ‘ls’ with “--dired”"
+      casual-dired--customize-dired-use-ls-dired
+      :transient nil)
+     ("s" "Initial Listing Switches"
+      casual-dired--customize-dired-listing-switches
+      :transient nil)
+     ("c" "Initial Listing Switches for “Sort By” Menu"
+      casual-dired--customize-casual-dired-listing-switches
+      :transient nil)]]
+
+  [["wdired"
+    ("p" "Allow Changing Permissions"
+     casual-dired--customize-wdired-allow-to-change-permissions
      :transient nil)
-    ("s" "Dired Listing Switches"
-     casual-dired--customize-dired-listing-switches
-     :transient nil)
-    ("c" "Casual Listing Switches"
-     casual-dired--customize-casual-dired-listing-switches
-     :transient nil)
+
+    ("L" "Allow Redirecting Links"
+     casual-dired--customize-wdired-allow-to-redirect-links
+     :transient nil)]
+
+   ["Dired"
     ("d" "Dired Group"
      casual-dired--customize-dired-group
      :transient nil)]]
-  [""
-   :class transient-row
+
+  [:class transient-row
    ("a" "About" casual-dired-about :transient nil)
    ("v" "Version" casual-dired-version :transient nil)
    ("q" "Dismiss" ignore :transient transient--do-exit)])
@@ -61,7 +83,7 @@
 (defun casual-dired--customize-dired-use-ls-dired ()
   "Customize if “--dired” switch is passed to ‘ls’.
 
-Customize the variable `dired-use-ls-dired'. If
+Customize the variable `dired-use-ls-dired'.  If
 `dired-use-ls-dired' is non-nil, then pass the “--dired” option
 to ‘ls’.
 
@@ -96,9 +118,48 @@ Switches passed to ‘ls’ for Dired.  MUST contain the ‘l’ option."
 (defun casual-dired--customize-casual-dired-listing-switches ()
   "Customize `casual-dired-listing-switches'.
 
-Customizes switches that are enabled by the Casual “Dired Sort” By menu."
+Customizes switches that initialize the Casual Dired “Sort By”
+menu (`casual-dired-sort-by-tmenu').  Note that this variable is
+unused if the user saves the state of this Transient menu.
+
+To avoid unforeseen dependencies, this variable is independent
+from the value of `dired-listing-switches'.  That said, it is
+recommended to set both `dired-listing-switches' and
+`casual-dired-listing-switches' to be consistent with each other."
   (interactive)
   (customize-variable 'casual-dired-listing-switches))
+
+(defun casual-dired--customize-casual-dired-use-utf8-symbols ()
+  "Customize `casual-dired-use-utf8-symbols'.
+
+Customize Casual Dired to use UTF-8 symbols in place of strings
+when appropriate."
+  (interactive)
+  (customize-variable 'casual-dired-use-utf8-symbols))
+
+(defun casual-dired--customize-delete-by-moving-to-trash ()
+  "Customize `delete-by-moving-to-trash'.
+
+Customize the variable `delete-by-moving-to-trash'.  Specifies
+whether to use the system’s trash can."
+  (interactive)
+  (customize-variable 'delete-by-moving-to-trash))
+
+(defun casual-dired--customize-wdired-allow-to-change-permissions ()
+  "Customize `wdired-allow-to-change-permissions'.
+
+Customize the variable `wdired-allow-to-change-permissions'.
+If non-nil, the permissions bits of the files are editable."
+  (interactive)
+  (customize-variable 'wdired-allow-to-change-permissions))
+
+(defun casual-dired--customize-wdired-allow-to-redirect-links ()
+  "Customize `wdired-allow-to-redirect-links'.
+
+Customize the variable `wdired-allow-to-redirect-links'.
+If non-nil, the permissions bits of the files are editable."
+  (interactive)
+  (customize-variable 'wdired-allow-to-redirect-links))
 
 (defun casual-dired--customize-dired-group ()
   "Call the Dired customization group."
