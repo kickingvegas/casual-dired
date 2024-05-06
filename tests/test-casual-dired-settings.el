@@ -31,11 +31,15 @@
 (ert-deftest test-casual-dired-settings-tmenu-bindings ()
   (casualt-setup)
   (let ((test-vectors (list)))
+    (push (casualt-suffix-test-vector "T" #'casual-dired--customize-delete-by-moving-to-trash) test-vectors)
     (push (casualt-suffix-test-vector "l" #'casual-dired--customize-dired-use-ls-dired) test-vectors)
     (push (casualt-suffix-test-vector "r" #'casual-dired--customize-dired-auto-revert-buffer) test-vectors)
     (push (casualt-suffix-test-vector "t" #'casual-dired--customize-dired-dwim-target) test-vectors)
     (push (casualt-suffix-test-vector "s" #'casual-dired--customize-dired-listing-switches) test-vectors)
     (push (casualt-suffix-test-vector "c" #'casual-dired--customize-casual-dired-listing-switches) test-vectors)
+    (push (casualt-suffix-test-vector "p" #'casual-dired--customize-wdired-allow-to-change-permissions) test-vectors)
+    (push (casualt-suffix-test-vector "L" #'casual-dired--customize-wdired-allow-to-redirect-links) test-vectors)
+    (push (casualt-suffix-test-vector "u" #'casual-dired--customize-casual-dired-use-utf8-symbols) test-vectors)
     (push (casualt-suffix-test-vector "d" #'casual-dired--customize-dired-group) test-vectors)
     (push (casualt-suffix-test-vector "a" #'casual-dired-about) test-vectors)
     (push (casualt-suffix-test-vector "v" #'casual-dired-version) test-vectors)
@@ -44,8 +48,6 @@
                                      #'casual-dired-settings-tmenu
                                      '(lambda () (random 5000))))
   (casualt-breakdown t))
-
-
 
 (provide 'test-casual-dired-settings)
 ;;; test-casual-dired-setttings.el ends here

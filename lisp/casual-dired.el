@@ -5,7 +5,7 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.0.2
+;; Version: 1.0.3
 ;; Package-Requires: ((emacs "29.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -37,14 +37,14 @@
 (require 'image-dired)
 (require 'casual-dired-sort-by)
 (require 'casual-dired-version)
+(require 'casual-dired-variables)
 (require 'casual-dired-settings)
 
 ;;; Menus
 ;;;###autoload (autoload 'casual-dired-tmenu "casual-dired" nil t)
 (transient-define-prefix casual-dired-tmenu ()
   "Transient menu for Dired."
-  ["Dired"
-   ["File"
+  [["File"
     ("o" "Open Other" dired-find-file-other-window :transient nil)
     ("C" "Copy to…" dired-do-copy :transient nil)
     ("R" "Rename…" dired-do-rename :transient nil)
@@ -94,20 +94,73 @@
 
    ["Navigation"
     :pad-keys t
-    ("^" ".. 📁" dired-up-directory :transient t)
-    ("p" " ↑ 📄" dired-previous-line :transient t)
-    ("n" " ↓ 📄" dired-next-line :transient t)
+    ("^" ".." dired-up-directory
+     :description (lambda () (format ".. %s" (casual-dired-directory-label
+                                              casual-dired-use-utf8-symbols)))
+     :transient t)
+    ("p" " ↑ 📄" dired-previous-line
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-up-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-file-label
+                             casual-dired-use-utf8-symbols)))
+     :transient t)
+    ("n" " ↓ 📄" dired-next-line
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-down-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-file-label
+                             casual-dired-use-utf8-symbols)))
+     :transient t)
     ("M-p" " ↑ 📁" dired-prev-dirline
      :if-not casual-dired-lisp-dired-buffer-p
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-up-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-directory-label
+                             casual-dired-use-utf8-symbols)))
      :transient t)
     ("M-n" " ↓ 📁" dired-next-dirline
      :if-not casual-dired-lisp-dired-buffer-p
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-down-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-directory-label
+                             casual-dired-use-utf8-symbols)))
      :transient t)
     ("[" " ↑ 🗂️" dired-prev-subdir
      :if-not casual-dired-lisp-dired-buffer-p
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-up-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-subdir-label
+                             casual-dired-use-utf8-symbols)))
      :transient t)
     ("]" " ↓ 🗂️" dired-next-subdir
      :if-not casual-dired-lisp-dired-buffer-p
+     :description (lambda ()
+                    (format "%s %s"
+                            (casual-dired-format-arrow
+                             (casual-dired-down-arrow-label
+                              casual-dired-use-utf8-symbols)
+                             casual-dired-use-utf8-symbols)
+                            (casual-dired-subdir-label
+                             casual-dired-use-utf8-symbols)))
      :transient t)]]
 
   [["Quick"
@@ -123,7 +176,7 @@
     ("+" "Directory" dired-create-directory :transient t)
     ("F" "File" dired-create-empty-file :transient t)]]
 
-  [""
+  [
    :class transient-row
    ("<return>" "Open" dired-find-file :transient nil)
    ("," "Settings" casual-dired-settings-tmenu :transient nil)
@@ -198,7 +251,7 @@ This buffer is created by the command `find-lisp-find-dired'."
 (defun casual-dired--variable-to-checkbox (v)
   "Checkbox string representation of variable V.
 V is either nil or non-nil."
-  (if (display-graphic-p)
+  (if casual-dired-use-utf8-symbols
       (if v "☑︎" "◻︎")
     (if v "[x]" "[ ]")))
 
@@ -209,6 +262,42 @@ V is either nil or non-nil."
 (defun casual-dired--checkbox-label (v label)
   "Checkbox label using variable V and LABEL."
   (casual-dired--prefix-label label (casual-dired--variable-to-checkbox v)))
+
+(defun casual-dired-file-label (&optional utf8)
+  "If UTF8 is non-nil, use UTF-8 symbol for file."
+  (if utf8
+      "📄"
+    "File"))
+
+(defun casual-dired-subdir-label (&optional utf8)
+  "If UTF8 is non-nil, use UTF-8 symbol for subdir."
+  (if utf8
+      "🗂️"
+    "Subdir"))
+
+(defun casual-dired-directory-label (&optional utf8)
+  "If UTF8 is non-nil, use UTF-8 symbol for directory."
+  (if utf8
+      "📁"
+    "Dir"))
+
+(defun casual-dired-up-arrow-label (&optional utf8)
+  "If UTF8 is non-nil, use UTF-8 symbol for up arrow."
+  (if utf8
+      "↑"
+    "Up"))
+
+(defun casual-dired-down-arrow-label (&optional utf8)
+  "If UTF8 is non-nil, use UTF-8 symbol for down arrow."
+  (if utf8
+      "↓"
+    "Down"))
+
+(defun casual-dired-format-arrow (buf typeset)
+  "If TYPESET is non-nil, then format BUF string to have space."
+  (if typeset
+      (format " %s" buf)
+    buf))
 
 (provide 'casual-dired)
 ;;; casual-dired.el ends here
