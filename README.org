@@ -22,7 +22,7 @@ While highly functional, Dired has a steep learning curve as it relies on single
 
 Casual Dired has been verified with the following configuration. 
 - Emacs 29.3 (macOS 14.4.1, Ubuntu Linux 22.04.4 LTS)
-- GNU ~ls~ (coreutils 9.5)
+- GNU ~ls~ (coreutils 9.5, 8.32)
 - ImageMagick ~identify~ (ImageMagick 6.9.13)
 
 The Casual Dired /Sort By/ feature relies on the installation of GNU ~ls~. The Casual Dired /Image Info/ feature relies on the ~indentify~ CLI utility. Both programs must be configured (typically via ~PATH~) so that they are available to Emacs. There is no checking by Casual Dired to verify that either the aforementioned utilities are installed.
@@ -33,9 +33,9 @@ Users with earlier versions of GNU coreutils and ImageMagick may still be able t
 As Casual Dired is new, we are looking for early adopters! Your [[https://github.com/kickingvegas/casual-dired/discussions][feedback]] is welcome as it will likely impact Casual Dired's evolution, particularly with regards to UI.
 
 * Install
-If installed via MELPA (TBD) then add this line to your Emacs initialization file.
+If installed via MELPA then add these lines to your Emacs initialization file with your binding of preference. 
 #+begin_src elisp :lexical no
-  (require 'casual-dired)
+  (require 'casual-dired) ;; optional
   (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
 #+end_src
 
@@ -46,19 +46,13 @@ If you use ~use-package~, here is the recipe for installing it.
     :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
 #+end_src
 
-If you are installing by using a clone of this repository, then ensure that the directory holding ~casual-dired.el~ is in your ~info-path~. Add the following lines to your Emacs initialization file.
-
-#+begin_src elisp :lexical no
-  (require 'casual-dired)
-  (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
-#+end_src
-
 Included is a standard keymap for Dired sorting commands (~casual-dired-sort-menu~) which can be included in a context menu for a mouse-driven workflow.
-
 
 #+begin_src elisp :lexical no
   (easy-menu-add-item menu nil casual-dired-sort-menu)
 #+end_src
+
+For users running on Microsoft Windows, use [[https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Dired-ls.html][this guidance]] to configure GNU ~ls~ for running with Dired.
 
 Casual requires Emacs 29.1+.
 
