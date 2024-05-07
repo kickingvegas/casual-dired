@@ -209,8 +209,7 @@ See the man page `ls(1)' for details."
 
      ((eq criteria :date-modified)
       (message "Sorted by date modified")
-      (push "--sort=time" arg-list)
-      (push "--time=modification" arg-list))
+      (push "-t" arg-list))
 
      ((eq criteria :date-metadata-changed)
       (message "Sorted by date metadata changed")
