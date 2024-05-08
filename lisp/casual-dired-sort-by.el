@@ -57,7 +57,20 @@
 This function requires GNU ls from coreutils installed."
   :value casual-dired-listing-switches
   :man-page "ls"
-  [["Sort By"
+  [["Options"
+    ("." "Show all (include .*)" "--all")
+    ("g" "Group directories first" "--group-directories-first")
+    ("r" "Reverse" "--reverse")
+    ("t" "Set time style" "--time-style="
+     :choices ("full-iso" "long-iso" "iso" "locale"))
+    ("h" "Show size like 1K 234M 2G etc." "--human-readable")
+    ("1" "Like above but in powers of 1000" "--si")
+    ("O" "Hide owner" "-g")
+    ("G" "Hide group" "--no-group")
+    ("N" "Use numeric UID/GID" "--numeric-uid-gid")
+    ("i" "Show inode" "--inode")]
+
+   ["Sort By"
     ("n" "Name" casual-dired--sort-by-name :transient nil)
     ("k" "Kind" casual-dired--sort-by-kind :transient nil)
     ("l" "Date Last Opened" casual-dired--sort-by-date-last-opened
@@ -67,15 +80,7 @@ This function requires GNU ls from coreutils installed."
     ("M" "Date Metadata Changed" casual-dired--sort-by-date-metadata-changed
      :transient nil)
     ("v" "Version" casual-dired--sort-by-version :transient nil)
-    ("s" "Size" casual-dired--sort-by-size :transient nil)]
-
-   ["Options"
-    ("." "Show All (include . files)" "--all")
-    ("g" "Group Directories First" "--group-directories-first")
-    ("r" "Reverse" "--reverse")
-    ("h" "Human Readable" "--human-readable")
-    ("t" "Set Time Style" "--time-style="
-     :choices ("full-iso" "long-iso" "iso" "locale"))]]
+    ("s" "Size" casual-dired--sort-by-size :transient nil)]]
 
   [("q" "Dismiss" ignore :transient transient--do-exit)])
 

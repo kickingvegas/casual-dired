@@ -39,6 +39,7 @@
 (require 'casual-dired-version)
 (require 'casual-dired-variables)
 (require 'casual-dired-settings)
+(require 'casual-dired-utils)
 
 ;;; Menus
 ;;;###autoload (autoload 'casual-dired-tmenu "casual-dired" nil t)
@@ -90,7 +91,8 @@
     ("t" "Toggle Marks" dired-toggle-marks :transient t)
     ("~" "Flag Backups" dired-flag-backup-files :transient t)
     ("x" "Delete Flagged" dired-do-flagged-delete :transient t)
-    ("r" "Regexp›" casual-dired-regexp-tmenu :transient nil)]
+    ("r" "Regexp›" casual-dired-regexp-tmenu :transient nil)
+    ("#" "Utils›" casual-dired-utils-tmenu :transient nil)]
 
    ["Navigation"
     :pad-keys t
@@ -176,11 +178,10 @@
     ("+" "Directory" dired-create-directory :transient t)
     ("F" "File" dired-create-empty-file :transient t)]]
 
-  [
-   :class transient-row
-   ("<return>" "Open" dired-find-file :transient nil)
-   ("," "Settings" casual-dired-settings-tmenu :transient nil)
-   ("q" "Dismiss" ignore :transient transient--do-exit)])
+  [:class transient-row
+          ("<return>" "Open" dired-find-file :transient nil)
+          ("," "Settings" casual-dired-settings-tmenu :transient nil)
+          ("q" "Dismiss" ignore :transient transient--do-exit)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()
   "Transient menu for Dired mark regexp functions."
@@ -199,7 +200,6 @@
     ("O" "Owner…" dired-do-chown :transient t)]
    [("T" "Touch" dired-do-touch :transient t)]]
   [("q" "Dismiss" ignore :transient transient--do-exit)])
-
 
 ;;; Functions
 (defun casual-dired--identify-image (filename)
