@@ -57,15 +57,7 @@
 This function requires GNU ls from coreutils installed."
   :value casual-dired-listing-switches
   :man-page "ls"
-  [["Arguments"
-    ("-a" "all" "--all")
-    ("g" "group directories first" "--group-directories-first")
-    ("-r" "reverse" "--reverse")
-    ("-h" "human readable" "--human-readable")
-    ("t" "time style" "--time-style="
-     :choices ("full-iso" "long-iso" "iso" "locale"))]
-
-   ["Sort By"
+  [["Sort By"
     ("n" "Name" casual-dired--sort-by-name :transient nil)
     ("k" "Kind" casual-dired--sort-by-kind :transient nil)
     ("l" "Date Last Opened" casual-dired--sort-by-date-last-opened
@@ -75,7 +67,15 @@ This function requires GNU ls from coreutils installed."
     ("M" "Date Metadata Changed" casual-dired--sort-by-date-metadata-changed
      :transient nil)
     ("v" "Version" casual-dired--sort-by-version :transient nil)
-    ("s" "Size" casual-dired--sort-by-size :transient nil)]]
+    ("s" "Size" casual-dired--sort-by-size :transient nil)]
+
+   ["Options"
+    ("." "Show All (include . files)" "--all")
+    ("g" "Group Directories First" "--group-directories-first")
+    ("r" "Reverse" "--reverse")
+    ("h" "Human Readable" "--human-readable")
+    ("t" "Set Time Style" "--time-style="
+     :choices ("full-iso" "long-iso" "iso" "locale"))]]
 
   [("q" "Dismiss" ignore :transient transient--do-exit)])
 
