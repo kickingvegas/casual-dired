@@ -112,13 +112,13 @@ Casual Dired offers a settings menu to customize a set of commonly used Dired va
 
 If you have GNU ~ls~ installed and configured, use the ~l~ key to set the variable ~dired-use-ls-dired~ to ~t~ ("Use GNU ‘ls’ with --dired"). Otherwise this should be disabled.
 
-** UTF-8 Symbol Support
+** Unicode Symbol Support
 
-By enabling “Use UTF-8 Symbols” from the Settings menu, Casual Dired will use UTF-8 symbols as appropriate in its menus. An example is shown below.
+By enabling “Use Unicode Symbols” from the Settings menu, Casual Dired will use Unicode symbols as appropriate in its menus. An example is shown below.
 
-[[file:docs/images/casual-dired-screenshot-utf8.png]]
+[[file:docs/images/casual-dired-screenshot-unicode.png]]
 
-To ensure proper layout and spacing, your default typeface should be fixed-width or monospace and *must* support the UTF-8 symbols used.
+To ensure proper layout and spacing, your default typeface should be fixed-width or monospace and *must* support the Unicode symbols used.
 
 * Common Menu Actions
 Casual Dired is built using Transient menus and as such adopts much of its default behavior.

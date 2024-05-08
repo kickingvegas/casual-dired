@@ -98,27 +98,27 @@
     :pad-keys t
     ("^" ".." dired-up-directory
      :description (lambda () (format ".. %s" (casual-dired-directory-label
-                                              casual-dired-use-utf8-symbols)))
+                                              casual-dired-use-unicode-symbols)))
      :transient t)
     ("p" " ↑ 📄" dired-previous-line
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-up-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-file-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)
     ("n" " ↓ 📄" dired-next-line
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-down-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-file-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)
     ("M-p" " ↑ 📁" dired-prev-dirline
      :if-not casual-dired-lisp-dired-buffer-p
@@ -126,10 +126,10 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-up-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-directory-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)
     ("M-n" " ↓ 📁" dired-next-dirline
      :if-not casual-dired-lisp-dired-buffer-p
@@ -137,10 +137,10 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-down-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-directory-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)
     ("[" " ↑ 🗂️" dired-prev-subdir
      :if-not casual-dired-lisp-dired-buffer-p
@@ -148,10 +148,10 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-up-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-subdir-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)
     ("]" " ↓ 🗂️" dired-next-subdir
      :if-not casual-dired-lisp-dired-buffer-p
@@ -159,10 +159,10 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-down-arrow-label
-                              casual-dired-use-utf8-symbols)
-                             casual-dired-use-utf8-symbols)
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
                             (casual-dired-subdir-label
-                             casual-dired-use-utf8-symbols)))
+                             casual-dired-use-unicode-symbols)))
      :transient t)]]
 
   [["Quick"
@@ -251,7 +251,7 @@ This buffer is created by the command `find-lisp-find-dired'."
 (defun casual-dired--variable-to-checkbox (v)
   "Checkbox string representation of variable V.
 V is either nil or non-nil."
-  (if casual-dired-use-utf8-symbols
+  (if casual-dired-use-unicode-symbols
       (if v "☑︎" "◻︎")
     (if v "[x]" "[ ]")))
 
@@ -263,33 +263,33 @@ V is either nil or non-nil."
   "Checkbox label using variable V and LABEL."
   (casual-dired--prefix-label label (casual-dired--variable-to-checkbox v)))
 
-(defun casual-dired-file-label (&optional utf8)
-  "If UTF8 is non-nil, use UTF-8 symbol for file."
-  (if utf8
+(defun casual-dired-file-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for file."
+  (if unicode
       "📄"
     "File"))
 
-(defun casual-dired-subdir-label (&optional utf8)
-  "If UTF8 is non-nil, use UTF-8 symbol for subdir."
-  (if utf8
+(defun casual-dired-subdir-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for subdir."
+  (if unicode
       "🗂️"
     "Subdir"))
 
-(defun casual-dired-directory-label (&optional utf8)
-  "If UTF8 is non-nil, use UTF-8 symbol for directory."
-  (if utf8
+(defun casual-dired-directory-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for directory."
+  (if unicode
       "📁"
     "Dir"))
 
-(defun casual-dired-up-arrow-label (&optional utf8)
-  "If UTF8 is non-nil, use UTF-8 symbol for up arrow."
-  (if utf8
+(defun casual-dired-up-arrow-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for up arrow."
+  (if unicode
       "↑"
     "Up"))
 
-(defun casual-dired-down-arrow-label (&optional utf8)
-  "If UTF8 is non-nil, use UTF-8 symbol for down arrow."
-  (if utf8
+(defun casual-dired-down-arrow-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for down arrow."
+  (if unicode
       "↓"
     "Down"))
 

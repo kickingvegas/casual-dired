@@ -39,7 +39,7 @@
     (push (casualt-suffix-test-vector "c" #'casual-dired--customize-casual-dired-listing-switches) test-vectors)
     (push (casualt-suffix-test-vector "p" #'casual-dired--customize-wdired-allow-to-change-permissions) test-vectors)
     (push (casualt-suffix-test-vector "L" #'casual-dired--customize-wdired-allow-to-redirect-links) test-vectors)
-    (push (casualt-suffix-test-vector "u" #'casual-dired--customize-casual-dired-use-utf8-symbols) test-vectors)
+    (push (casualt-suffix-test-vector "u" #'casual-dired--customize-casual-dired-use-unicode-symbols) test-vectors)
     (push (casualt-suffix-test-vector "d" #'casual-dired--customize-dired-group) test-vectors)
     (push (casualt-suffix-test-vector "a" #'casual-dired-about) test-vectors)
     (push (casualt-suffix-test-vector "v" #'casual-dired-version) test-vectors)

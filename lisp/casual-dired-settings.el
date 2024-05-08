@@ -44,8 +44,8 @@
       casual-dired--customize-dired-dwim-target
       :transient nil)
 
-     ("u" "Use UTF-8 Symbols"
-     casual-dired--customize-casual-dired-use-utf8-symbols
+     ("u" "Use Unicode Symbols"
+     casual-dired--customize-casual-dired-use-unicode-symbols
      :transient nil)]
 
     ["GNU ‘ls’"
@@ -129,13 +129,13 @@ recommended to set both `dired-listing-switches' and
   (interactive)
   (customize-variable 'casual-dired-listing-switches))
 
-(defun casual-dired--customize-casual-dired-use-utf8-symbols ()
-  "Customize `casual-dired-use-utf8-symbols'.
+(defun casual-dired--customize-casual-dired-use-unicode-symbols ()
+  "Customize `casual-dired-use-unicode-symbols'.
 
-Customize Casual Dired to use UTF-8 symbols in place of strings
+Customize Casual Dired to use Unicode symbols in place of strings
 when appropriate."
   (interactive)
-  (customize-variable 'casual-dired-use-utf8-symbols))
+  (customize-variable 'casual-dired-use-unicode-symbols))
 
 (defun casual-dired--customize-delete-by-moving-to-trash ()
   "Customize `delete-by-moving-to-trash'.
