@@ -57,13 +57,18 @@
 This function requires GNU ls from coreutils installed."
   :value casual-dired-listing-switches
   :man-page "ls"
-  [["Arguments"
-    ("-a" "all" "--all")
-    ("g" "group directories first" "--group-directories-first")
-    ("-r" "reverse" "--reverse")
-    ("-h" "human readable" "--human-readable")
-    ("t" "time style" "--time-style="
-     :choices ("full-iso" "long-iso" "iso" "locale"))]
+  [["Options"
+    ("." "Show all (include .*)" "--all")
+    ("g" "Group directories first" "--group-directories-first")
+    ("r" "Reverse" "--reverse")
+    ("t" "Set time style" "--time-style="
+     :choices ("full-iso" "long-iso" "iso" "locale"))
+    ("h" "Show size like 1K 234M 2G etc." "--human-readable")
+    ("1" "Like above but in powers of 1000" "--si")
+    ("O" "Hide owner" "-g")
+    ("G" "Hide group" "--no-group")
+    ("N" "Use numeric UID/GID" "--numeric-uid-gid")
+    ("i" "Show inode" "--inode")]
 
    ["Sort By"
     ("n" "Name" casual-dired--sort-by-name :transient nil)

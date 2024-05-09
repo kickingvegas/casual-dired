@@ -57,8 +57,8 @@ See the man page `ls(1)' for details."
   :type '(repeat string)
   :group 'dired)
 
-(defcustom casual-dired-use-utf8-symbols nil
-  "If non-nil then use UTF-8 symbols whenever appropriate for labels."
+(defcustom casual-dired-use-unicode-symbols nil
+  "If non-nil then use Unicode symbols whenever appropriate for labels."
   :type 'boolean
   :group 'dired)
 

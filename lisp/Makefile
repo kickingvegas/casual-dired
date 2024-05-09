@@ -26,7 +26,7 @@ else
 endif
 
 ELISP_INCLUDES=casual-dired-version.el casual-dired-variables.el
-ELISP_PACKAGES=casual-dired-settings.el casual-dired-sort-by.el
+ELISP_PACKAGES=casual-dired-settings.el casual-dired-sort-by.el casual-dired-utils.el
 ELISP_TEST_INCLUDES=casual-dired-test-utils.el
 PACKAGE_NAME=casual-dired
 

@@ -61,11 +61,17 @@ Casual requires Emacs 29.1+.
 2. When the point is in the Dired window, invoke ~C-o~ (or a binding of your choosing) to launch the Casual Dired menu.
 
 ** Enhanced Sorting
-Casual Dired offers enhanced sorting capabilities through GNU ~ls~. Use this to sort your Dired buffer to preference. Filtering dot files by disabling the ~--all~ option is available here.
+Casual Dired offers enhanced sorting capabilities through GNU ~ls~. Use this to sort your Dired buffer to preference. Filtering dot files (.*) by disabling the ~--all~ option is available here.
 
 [[file:docs/images/casual-dired-sort-by-screenshot.png]]
 
 With the *Sort By* menu raised, one can save the switch settings for future use via the binding ~C-x C-s~ (~transient-save~). Note this is a global setting and will apply to all future calls to the *Sort By* menu.
+
+** Bulk Dired Operations
+Casual Dired organizes a number of Dired commands that work on a set of marked files. These commands are presented in the *Utils* menu.
+
+[[file:docs/images/casual-dired-utils-screenshot.png]]
+
 
 * Configuration
 
@@ -112,13 +118,13 @@ Casual Dired offers a settings menu to customize a set of commonly used Dired va
 
 If you have GNU ~ls~ installed and configured, use the ~l~ key to set the variable ~dired-use-ls-dired~ to ~t~ ("Use GNU ‘ls’ with --dired"). Otherwise this should be disabled.
 
-** UTF-8 Symbol Support
+** Unicode Symbol Support
 
-By enabling “Use UTF-8 Symbols” from the Settings menu, Casual Dired will use UTF-8 symbols as appropriate in its menus. An example is shown below.
+By enabling “Use Unicode Symbols” from the Settings menu, Casual Dired will use Unicode symbols as appropriate in its menus. An example is shown below.
 
-[[file:docs/images/casual-dired-screenshot-utf8.png]]
+[[file:docs/images/casual-dired-screenshot-unicode.png]]
 
-To ensure proper layout and spacing, your default typeface should be fixed-width or monospace and *must* support the UTF-8 symbols used.
+To ensure proper layout and spacing, your default typeface should be fixed-width or monospace and *must* support the Unicode symbols used.
 
 * Common Menu Actions
 Casual Dired is built using Transient menus and as such adopts much of its default behavior.
