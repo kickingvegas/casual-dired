@@ -67,7 +67,7 @@
 (transient-define-prefix casual-dired-elisp-tmenu ()
   ["Emacs Lisp"
    ["Byte-Compile"
-    ("B" "Byte-compile" dired-do-byte-compile :transient nil)
+    ("B" "Byte-compile…" dired-do-byte-compile :transient nil)
     ("D" "Byte-compile directory…" byte-recompile-directory :transient nil)]
 
    ["Load"

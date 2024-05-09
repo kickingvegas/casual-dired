@@ -61,11 +61,17 @@ Casual requires Emacs 29.1+.
 2. When the point is in the Dired window, invoke ~C-o~ (or a binding of your choosing) to launch the Casual Dired menu.
 
 ** Enhanced Sorting
-Casual Dired offers enhanced sorting capabilities through GNU ~ls~. Use this to sort your Dired buffer to preference. Filtering dot files by disabling the ~--all~ option is available here.
+Casual Dired offers enhanced sorting capabilities through GNU ~ls~. Use this to sort your Dired buffer to preference. Filtering dot files (.*) by disabling the ~--all~ option is available here.
 
 [[file:docs/images/casual-dired-sort-by-screenshot.png]]
 
 With the *Sort By* menu raised, one can save the switch settings for future use via the binding ~C-x C-s~ (~transient-save~). Note this is a global setting and will apply to all future calls to the *Sort By* menu.
+
+** Bulk Dired Operations
+Casual Dired organizes a number of Dired commands that work on a set of marked files. These commands are presented in the *Utils* menu.
+
+[[file:docs/images/casual-dired-utils-screenshot.png]]
+
 
 * Configuration
 
