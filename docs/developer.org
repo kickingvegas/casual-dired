@@ -40,7 +40,7 @@ Casual Dired uses the [[https://www.gnu.org/software/emacs/manual/html_node/ert/
 
 One can run a test for a single file by using a "phony" target with a suffix of ~.elt~ in the ~lisp/~ directory containing all the source files.
 
-For example, in the ~lisp/~ directory, run this command to exercise all tests for functions in ~casual-financial.el~.
+For example, in the ~lisp/~ directory, run this command to exercise all tests for functions in ~casual-dired-sort-by.el~.
 
 #+begin_src test
   $ make casual-dired-sort-by.elt

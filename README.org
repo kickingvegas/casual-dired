@@ -46,6 +46,8 @@ If you use ~use-package~, here is the recipe for installing it.
     :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
 #+end_src
 
+In addition, you may wish to directly sort the Dired buffer by different criteria. Binding ~s~ (or one of your choosing) to ~casual-dired-sort-by-tmenu~ will accomplish this. Look below in the Configuration section to see how this can be done.
+
 Included is a standard keymap for Dired sorting commands (~casual-dired-sort-menu~) which can be included in a context menu for a mouse-driven workflow.
 
 #+begin_src elisp :lexical no
