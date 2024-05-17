@@ -33,31 +33,32 @@
 (transient-define-prefix casual-dired-settings-tmenu ()
   ["Dired Settings"
    ["Customize"
-     ("T" "Use System Trash Can"
-      casual-dired--customize-delete-by-moving-to-trash
-      :transient nil)
-
-     ("r" "Revert Policy"
+    ("T" "Use System Trash Can"
+     casual-dired--customize-delete-by-moving-to-trash
+     :transient nil)
+    ("r" "Revert Policy"
      casual-dired--customize-dired-auto-revert-buffer
      :transient nil)
-     ("t" "Target Directory"
-      casual-dired--customize-dired-dwim-target
-      :transient nil)
-
-     ("u" "Use Unicode Symbols"
+    ("t" "Target Directory"
+     casual-dired--customize-dired-dwim-target
+     :transient nil)
+    ("u" "Use Unicode Symbols"
      casual-dired--customize-casual-dired-use-unicode-symbols
+     :transient nil)
+    ("R" "Rename via VC"
+     casual-dired--customize-dired-vc-rename-file
      :transient nil)]
 
-    ["GNU ‘ls’"
-     ("l" "Use GNU ‘ls’ with “--dired”"
-      casual-dired--customize-dired-use-ls-dired
-      :transient nil)
-     ("s" "Initial Listing Switches"
-      casual-dired--customize-dired-listing-switches
-      :transient nil)
-     ("c" "Initial Listing Switches for “Sort By” Menu"
-      casual-dired--customize-casual-dired-listing-switches
-      :transient nil)]]
+   ["GNU ‘ls’"
+    ("l" "Use GNU ‘ls’ with “--dired”"
+     casual-dired--customize-dired-use-ls-dired
+     :transient nil)
+    ("s" "Initial Listing Switches"
+     casual-dired--customize-dired-listing-switches
+     :transient nil)
+    ("c" "Initial Listing Switches for “Sort By” Menu"
+     casual-dired--customize-casual-dired-listing-switches
+     :transient nil)]]
 
   [["wdired"
     ("p" "Allow Changing Permissions"
@@ -74,9 +75,9 @@
      :transient nil)]]
 
   [:class transient-row
-   ("a" "About" casual-dired-about :transient nil)
-   ("v" "Version" casual-dired-version :transient nil)
-   ("q" "Dismiss" ignore :transient transient--do-exit)])
+          ("a" "About" casual-dired-about :transient nil)
+          ("v" "Version" casual-dired-version :transient nil)
+          ("q" "Dismiss" ignore :transient transient--do-exit)])
 
 ;;; Functions
 
@@ -114,6 +115,14 @@ If non-nil, Dired tries to guess a default target directory."
 Switches passed to ‘ls’ for Dired.  MUST contain the ‘l’ option."
   (interactive)
   (customize-variable 'dired-listing-switches))
+
+(defun casual-dired--customize-dired-vc-rename-file ()
+    "Customize `dired-vc-rename-file'.
+
+This variable configures whether Dired should register file
+renaming in underlying vc system."
+  (interactive)
+  (customize-variable 'dired-vc-rename-file))
 
 (defun casual-dired--customize-casual-dired-listing-switches ()
   "Customize `casual-dired-listing-switches'.
@@ -184,7 +193,9 @@ URL `https://www.buymeacoffee.com/kickingvegas'
 Casual Dired was conceived and crafted by Charles Choi in
 San Francisco, California.
 
-Thank you for using Casual Dired and always choose love."
+Thank you for using Casual Dired.
+
+Always choose love."
   (ignore))
 
 (defun casual-dired-about ()
