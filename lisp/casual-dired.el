@@ -163,10 +163,32 @@
                              casual-dired-use-unicode-symbols)
                             (casual-dired-subdir-label
                              casual-dired-use-unicode-symbols)))
+     :transient t)
+    ("j" " → 📄…" dired-goto-file
+     :description (lambda ()
+                    (format "%s %s…"
+                            (casual-dired-format-arrow
+                             (casual-dired-goto-label
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
+
+                             (casual-dired-file-label
+                              casual-dired-use-unicode-symbols)))
+     :transient t)
+    ("G" " → 🗂️…" dired-goto-subdir
+     :description (lambda ()
+                    (format "%s %s…"
+                            (casual-dired-format-arrow
+                             (casual-dired-goto-label
+                              casual-dired-use-unicode-symbols)
+                             casual-dired-use-unicode-symbols)
+
+                             (casual-dired-subdir-label
+                              casual-dired-use-unicode-symbols)))
      :transient t)]]
 
   [["Quick"
-    ("j" "Jump to Bookmark…" bookmark-jump :transient nil)
+    ("J" "Jump to Bookmark…" bookmark-jump :transient nil)
     ("B" "Add Bookmark…" bookmark-set-no-overwrite :transient nil)
     ("b" "List Buffers" ibuffer :transient nil)]
 
@@ -292,6 +314,12 @@ V is either nil or non-nil."
   (if unicode
       "↓"
     "Down"))
+
+(defun casual-dired-goto-label (&optional unicode)
+  "If UNICODE is non-nil, use Unicode symbol for goto."
+  (if unicode
+      "→"
+    "Goto"))
 
 (defun casual-dired-format-arrow (buf typeset)
   "If TYPESET is non-nil, then format BUF string to have space."
