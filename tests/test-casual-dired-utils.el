@@ -62,7 +62,6 @@
                                      '(lambda () (random 5000))))
   (casualt-breakdown t))
 
-
 (ert-deftest test-casual-dired-elisp-tmenu-bindings ()
   (casualt-setup)
 
@@ -89,6 +88,23 @@
                                      #'casual-dired-link-tmenu
                                      '(lambda () (random 5000))))
   (casualt-breakdown t))
+
+(ert-deftest test-casual-dired-unicode-db-get ()
+  (let ((casual-dired-use-unicode-symbols nil))
+    (should (string-equal (casual-dired-unicode-db-get :up-arrow) "Up"))
+    (should (string-equal (casual-dired-unicode-db-get :down-arrow) "Down"))
+    (should (string-equal (casual-dired-unicode-db-get :goto) "Goto"))
+    (should (string-equal (casual-dired-unicode-db-get :directory) "Dir"))
+    (should (string-equal (casual-dired-unicode-db-get :file) "File"))
+    (should (string-equal (casual-dired-unicode-db-get :subdir) "Subdir")))
+
+  (let ((casual-dired-use-unicode-symbols t))
+    (should (string-equal (casual-dired-unicode-db-get :up-arrow) "↑"))
+    (should (string-equal (casual-dired-unicode-db-get :down-arrow) "↓"))
+    (should (string-equal (casual-dired-unicode-db-get :goto) "→"))
+    (should (string-equal (casual-dired-unicode-db-get :directory) "📁"))
+    (should (string-equal (casual-dired-unicode-db-get :file) "📄"))
+    (should (string-equal (casual-dired-unicode-db-get :subdir) "🗂️"))))
 
 (provide 'test-casual-dired-utils)
 ;;; test-casual-dired-utils.el ends here

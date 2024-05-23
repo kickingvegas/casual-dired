@@ -29,6 +29,34 @@
 (require 'dired-x)
 (require 'checkdoc)
 (require 'elint)
+(require 'casual-dired-variables)
+
+(defconst casual-dired-unicode-db
+  '((:up-arrow . '("↑" "Up"))
+    (:down-arrow . '("↓" "Down"))
+    (:goto . '("→" "Goto"))
+    (:directory . '("📁" "Dir"))
+    (:file . '("📄" "File"))
+    (:subdir . '("🗂️" "Subdir")))
+  "Unicode symbol DB to use for Dired Transient menus.")
+
+(defun casual-dired-unicode-db-get (key &optional db)
+  "Lookup Unicode symbol for KEY in DB.
+
+- KEY symbol used to lookup Unicode symbol in DB.
+- DB alist containing Unicode symbols used by Info Transient menus.
+
+If DB is nil, then `casual-dired-unicode-db' is used by default.
+
+If the value of customizable variable `casual-dired-use-unicode-symbols'
+is non-nil, then the Unicode symbol is returned, otherwise a
+plain ASCII-range string."
+  (let* ((db (or db casual-dired-unicode-db))
+         (unicode casual-dired-use-unicode-symbols)
+         (item (alist-get key db)))
+    (if unicode
+        (nth 0 (eval item))
+      (nth 1 (eval item)))))
 
 (transient-define-prefix casual-dired-utils-tmenu ()
   ["Utils - Marked Files or File under Point"
