@@ -94,7 +94,7 @@
     (should (string-equal (casual-dired-unicode-db-get :up-arrow) "Up"))
     (should (string-equal (casual-dired-unicode-db-get :down-arrow) "Down"))
     (should (string-equal (casual-dired-unicode-db-get :goto) "Goto"))
-    (should (string-equal (casual-dired-unicode-db-get :directory) "Directory"))
+    (should (string-equal (casual-dired-unicode-db-get :directory) "Dir"))
     (should (string-equal (casual-dired-unicode-db-get :file) "File"))
     (should (string-equal (casual-dired-unicode-db-get :subdir) "Subdir")))
 
