@@ -101,7 +101,6 @@
                                      '(lambda () (random 5000))))
   (casualt-breakdown t))
 
-
 (ert-deftest test-casual-dired-change-tmenu-bindings ()
   (casualt-setup)
   (let ((test-vectors (list)))
@@ -116,93 +115,9 @@
   (casualt-breakdown t))
 
 
-(ert-deftest test-casual-dired-file-label ()
-  (casualt-setup)
-
-  (should (string-equal
-           "📄"
-           (casual-dired-file-label t)))
-
-  (should (string-equal
-           "File"
-           (casual-dired-file-label nil)))
-
-  (casualt-breakdown t))
-
-
-(ert-deftest test-casual-dired-subdir-label ()
-  (casualt-setup)
-
-  (should (string-equal
-           "🗂️"
-           (casual-dired-subdir-label t)))
-
-  (should (string-equal
-           "Subdir"
-           (casual-dired-subdir-label nil)))
-
-  (casualt-breakdown t))
-
-(ert-deftest test-casual-dired-directory-label ()
-  (casualt-setup)
-
-  (should (string-equal
-           "📁"
-           (casual-dired-directory-label t)))
-
-  (should (string-equal
-           "Dir"
-           (casual-dired-directory-label nil)))
-
-  (casualt-breakdown t))
-
-(ert-deftest test-casual-dired-up-arrow-label ()
-  (casualt-setup)
-
-  (should (string-equal
-           "↑"
-           (casual-dired-up-arrow-label t)))
-
-  (should (string-equal
-           "Up"
-           (casual-dired-up-arrow-label nil)))
-
-  (casualt-breakdown t))
-
-(ert-deftest test-casual-dired-down-arrow-label ()
-  (casualt-setup)
-
-  (should (string-equal
-           "↓"
-           (casual-dired-down-arrow-label t)))
-
-  (should (string-equal
-           "Down"
-           (casual-dired-down-arrow-label nil)))
-
-  (casualt-breakdown t))
-
-
 (ert-deftest test-casual-dired-format-arrow ()
-  (casualt-setup)
-
-  (should (string-equal
-           " ↓"
-           (casual-dired-format-arrow (casual-dired-down-arrow-label t) t)))
-
-  (should (string-equal
-           "Down"
-           (casual-dired-format-arrow (casual-dired-down-arrow-label nil) nil)))
-
-  (should (string-equal
-           " ↑"
-           (casual-dired-format-arrow (casual-dired-up-arrow-label t) t)))
-
-  (should (string-equal
-           "Up"
-           (casual-dired-format-arrow (casual-dired-up-arrow-label nil) nil)))
-
-  (casualt-breakdown t))
+  (should (string-equal (casual-dired-format-arrow "hey" t) " hey"))
+  (should (string-equal (casual-dired-format-arrow "hey" nil) "hey")))
 
 (provide 'test-casual-dired)
 ;;; test-casual-dired.el ends here
