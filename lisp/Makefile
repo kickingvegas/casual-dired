@@ -25,8 +25,8 @@ else
   EXEC_NAME=emacs
 endif
 
-ELISP_INCLUDES=casual-dired-version.el casual-dired-variables.el
-ELISP_PACKAGES=casual-dired-settings.el casual-dired-sort-by.el casual-dired-utils.el
+ELISP_INCLUDES=casual-dired-version.el casual-dired-variables.el casual-dired-utils.el
+ELISP_PACKAGES=casual-dired-settings.el casual-dired-sort-by.el
 ELISP_TEST_INCLUDES=casual-dired-test-utils.el
 PACKAGE_NAME=casual-dired
 
