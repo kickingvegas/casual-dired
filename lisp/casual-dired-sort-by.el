@@ -49,6 +49,7 @@
 (require 'transient)
 (require 'easymenu)
 (require 'mouse)
+(require 'casual-dired-utils)
 (require 'casual-dired-variables)
 
 (transient-define-prefix casual-dired-sort-by-tmenu ()
@@ -82,7 +83,9 @@ This function requires GNU ls from coreutils installed."
     ("v" "Version" casual-dired--sort-by-version :transient nil)
     ("s" "Size" casual-dired--sort-by-size :transient nil)]]
 
-  [("q" "Dismiss" ignore :transient transient--do-exit)])
+  [:class transient-row
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 (defun casual-dired--sort-by-name ()
   "Sort directory by name.

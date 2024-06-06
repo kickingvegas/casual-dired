@@ -74,7 +74,8 @@ plain ASCII-range string."
     ("l" "Link›" casual-dired-link-tmenu :transient nil)]]
 
   [:class transient-row
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 (transient-define-prefix casual-dired-search-replace-tmenu ()
   ["Search & Replace"
@@ -90,7 +91,8 @@ plain ASCII-range string."
      ("r" "Query regexp and replace…" dired-do-query-replace-regexp :transient nil)]]
 
   [:class transient-row
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 (transient-define-prefix casual-dired-elisp-tmenu ()
   ["Emacs Lisp"
@@ -106,7 +108,8 @@ plain ASCII-range string."
     ("c" "Check documentation strings" checkdoc-dired :transient nil)]]
 
   [:class transient-row
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 (transient-define-prefix casual-dired-link-tmenu ()
   ["Link"
@@ -115,8 +118,25 @@ plain ASCII-range string."
     ("S" "Symbolic link names with regexp…" dired-do-symlink-regexp :transient nil)]
 
   [:class transient-row
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
+;; Transient Navigation
+(transient-define-suffix casual-dired-quit-all ()
+  "Dismiss all menus."
+  :transient nil
+  :key "C-q"
+  :description "Dismiss"
+  (interactive)
+  (transient-quit-all))
+
+(transient-define-suffix casual-dired-quit-one ()
+  "Go back to previous menu."
+  :transient nil
+  :key "C-g"
+  :description "‹Back"
+  (interactive)
+  (transient-quit-one))
 
 (provide 'casual-dired-utils)
 ;;; casual-dired-utils.el ends here
