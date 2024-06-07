@@ -1,11 +1,11 @@
-;;; casual-dired.el --- Casual Dired                 -*- lexical-binding: t; -*-
+;;; casual-dired.el --- Transient UI for Dired -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024  Charles Choi
 
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.2.0
+;; Version: 1.3.0
 ;; Package-Requires: ((emacs "29.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -185,9 +185,10 @@
     ("F" "File" dired-create-empty-file :transient t)]]
 
   [:class transient-row
-          ("<return>" "Open" dired-find-file :transient nil)
+          ("RET" "Open" dired-find-file :transient nil)
           ("," "Settings" casual-dired-settings-tmenu :transient nil)
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-all)
+          ("q" "Quit Dired" quit-window)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()
   "Transient menu for Dired mark regexp functions."
@@ -197,7 +198,9 @@
    ("d" "Files For Deletion…" dired-flag-files-regexp :transient nil)
    ("C" "Files To Copy…" dired-do-copy-regexp :transient nil)
    ("r" "Files To Rename…" dired-do-rename-regexp :transient nil)]
-  [("q" "Dismiss" ignore :transient transient--do-exit)])
+  [:class transient-row
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 (transient-define-prefix casual-dired-change-tmenu ()
   ["Change"
@@ -205,7 +208,9 @@
     ("G" "Group…" dired-do-chgrp :transient t)
     ("O" "Owner…" dired-do-chown :transient t)]
    [("T" "Touch" dired-do-touch :transient t)]]
-  [("q" "Dismiss" ignore :transient transient--do-exit)])
+  [:class transient-row
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 ;;; Functions
 (defun casual-dired--identify-image (filename)

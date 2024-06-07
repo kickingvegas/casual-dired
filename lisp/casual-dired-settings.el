@@ -26,6 +26,7 @@
 (require 'transient)
 (require 'dired)
 (require 'wdired)
+(require 'casual-dired-utils)
 (require 'casual-dired-variables)
 (require 'casual-dired-version)
 
@@ -77,7 +78,8 @@
   [:class transient-row
           ("a" "About" casual-dired-about :transient nil)
           ("v" "Version" casual-dired-version :transient nil)
-          ("q" "Dismiss" ignore :transient transient--do-exit)])
+          (casual-dired-quit-one)
+          (casual-dired-quit-all)])
 
 ;;; Functions
 
@@ -176,7 +178,7 @@ If non-nil, the permissions bits of the files are editable."
   (customize-group "dired"))
 
 (defun casual-dired-about-dired ()
-  "Casual is an opinionated porcelain for Emacs Dired.
+  "Casual Dired is an opinionated porcelain for the Emacs file manager Dired.
 
 Learn more about using Casual Dired at our discussion group on GitHub.
 Any questions or comments about Casual should be made there.

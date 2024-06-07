@@ -36,14 +36,14 @@ As Casual Dired is new, we are looking for early adopters! Your [[https://github
 If installed via MELPA then add these lines to your Emacs initialization file with your binding of preference. 
 #+begin_src elisp :lexical no
   (require 'casual-dired) ;; optional
-  (define-key dired-mode-map (kbd "C-o") 'casual-dired-tmenu)
+  (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
 #+end_src
 
 If you use ~use-package~, here is the recipe for installing it.
 #+begin_src elisp :lexical no
   (use-package casual-dired
     :ensure t
-    :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
+    :bind (:map dired-mode-map ("C-o" . #'casual-dired-tmenu)))
 #+end_src
 
 In addition, you may wish to directly sort the Dired buffer by different criteria. Binding ~s~ (or one of your choosing) to ~casual-dired-sort-by-tmenu~ will accomplish this. Look below in the Configuration section to see how this can be done.
@@ -133,7 +133,7 @@ Casual Dired is built using Transient menus and as such adopts much of its defau
 
 Each menu item has a /key/ and a /label/. The /key/ is what is typed by the user to select the menu item. A key can be prefixed with a meta (M-) or control (C-) key. Labels ending with a ~>~ character indicates that it will open another menu.
 
-Dismissing a menu regardless of how deep you are in sub-menus can be done by entering ~q~. A menu can also be dismissed by entering ~C-g~, but this will return you to the parent menu.
+Dismissing a menu regardless of how deep you are in sub-menus can be done by entering ~C-q~. A menu can also be dismissed by entering ~C-g~, but this will return you to the parent menu.
 
 If a mouse is available, a menu item can be selected by moving the mouse cursor over its label and pressing down button 1.
 
