@@ -29,6 +29,7 @@
 (require 'dired-x)
 (require 'checkdoc)
 (require 'elint)
+(require 'casual-lib)
 (require 'casual-dired-variables)
 
 (defconst casual-dired-unicode-db
@@ -40,23 +41,15 @@
     (:subdir . '("🗂️" "Subdir")))
   "Unicode symbol DB to use for Dired Transient menus.")
 
-(defun casual-dired-unicode-db-get (key &optional db)
+(defun casual-dired-unicode-get (key)
   "Lookup Unicode symbol for KEY in DB.
 
 - KEY symbol used to lookup Unicode symbol in DB.
-- DB alist containing Unicode symbols used by Info Transient menus.
 
-If DB is nil, then `casual-dired-unicode-db' is used by default.
-
-If the value of customizable variable `casual-dired-use-unicode-symbols'
-is non-nil, then the Unicode symbol is returned, otherwise a
-plain ASCII-range string."
-  (let* ((db (or db casual-dired-unicode-db))
-         (unicode casual-dired-use-unicode-symbols)
-         (item (alist-get key db)))
-    (if unicode
-        (nth 0 (eval item))
-      (nth 1 (eval item)))))
+If the value of customizable variable `casual-lib-use-unicode' is
+non-nil, then the Unicode symbol is returned, otherwise a plain
+ASCII-range string."
+  (casual-lib-unicode-db-get key casual-dired-unicode-db))
 
 (transient-define-prefix casual-dired-utils-tmenu ()
   ["Utils - Marked Files or File under Point"
@@ -74,8 +67,8 @@ plain ASCII-range string."
     ("l" "Link›" casual-dired-link-tmenu :transient nil)]]
 
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 (transient-define-prefix casual-dired-search-replace-tmenu ()
   ["Search & Replace"
@@ -91,8 +84,8 @@ plain ASCII-range string."
      ("r" "Query regexp and replace…" dired-do-query-replace-regexp :transient nil)]]
 
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 (transient-define-prefix casual-dired-elisp-tmenu ()
   ["Emacs Lisp"
@@ -108,8 +101,8 @@ plain ASCII-range string."
     ("c" "Check documentation strings" checkdoc-dired :transient nil)]]
 
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 (transient-define-prefix casual-dired-link-tmenu ()
   ["Link"
@@ -118,11 +111,11 @@ plain ASCII-range string."
     ("S" "Symbolic link names with regexp…" dired-do-symlink-regexp :transient nil)]
 
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 ;; Transient Navigation
-(transient-define-suffix casual-dired-quit-all ()
+(transient-define-suffix casual-lib-quit-all ()
   "Dismiss all menus."
   :transient nil
   :key "C-q"
@@ -130,7 +123,7 @@ plain ASCII-range string."
   (interactive)
   (transient-quit-all))
 
-(transient-define-suffix casual-dired-quit-one ()
+(transient-define-suffix casual-lib-quit-one ()
   "Go back to previous menu."
   :transient nil
   :key "C-g"
