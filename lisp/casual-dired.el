@@ -5,8 +5,8 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.3.0
-;; Package-Requires: ((emacs "29.1"))
+;; Version: 1.4.0
+;; Package-Requires: ((emacs "29.1") (casual-lib "1.0.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@
 (require 'dired-x)
 (require 'wdired)
 (require 'image-dired)
+(require 'casual-lib)
 (require 'casual-dired-sort-by)
 (require 'casual-dired-version)
 (require 'casual-dired-variables)
@@ -64,12 +65,12 @@
     ("h" "Hide Details" dired-hide-details-mode
      :description
      (lambda ()
-       (casual-dired--checkbox-label dired-hide-details-mode "Hide Details"))
+       (casual-lib-checkbox-label dired-hide-details-mode "Hide Details"))
      :if-not casual-dired-lisp-dired-buffer-p
      :transient t)
     ("O" "Omit Mode" dired-omit-mode
      :description
-     (lambda () (casual-dired--checkbox-label dired-omit-mode "Omit Mode"))
+     (lambda () (casual-lib-checkbox-label dired-omit-mode "Omit Mode"))
      :transient t)
     ("i" "Insert Subdir" dired-maybe-insert-subdir
      :if-not casual-dired-lisp-dired-buffer-p
@@ -98,77 +99,77 @@
     :pad-keys t
     ("^" ".." dired-up-directory
      :description (lambda ()
-                    (format ".. %s" (casual-dired-unicode-db-get :directory)))
+                    (format ".. %s" (casual-dired-unicode-get :directory)))
      :transient t)
 
     ("p" " ↑ 📄" dired-previous-line
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :up-arrow)
+                             (casual-dired-unicode-get :up-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :file)))
+                            (casual-dired-unicode-get :file)))
      :transient t)
 
     ("n" " ↓ 📄" dired-next-line
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :down-arrow)
+                             (casual-dired-unicode-get :down-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :file)))
+                            (casual-dired-unicode-get :file)))
      :transient t)
     ("M-p" " ↑ 📁" dired-prev-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :up-arrow)
+                             (casual-dired-unicode-get :up-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :directory)))
+                            (casual-dired-unicode-get :directory)))
      :transient t)
     ("M-n" " ↓ 📁" dired-next-dirline
      :if-not casual-dired-lisp-dired-buffer-p
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :down-arrow)
+                             (casual-dired-unicode-get :down-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :directory)))
+                            (casual-dired-unicode-get :directory)))
      :transient t)
     ("[" " ↑ 🗂️" dired-prev-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :up-arrow)
+                             (casual-dired-unicode-get :up-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :subdir)))
+                            (casual-dired-unicode-get :subdir)))
      :transient t)
     ("]" " ↓ 🗂️" dired-next-subdir
      :if-not casual-dired-lisp-dired-buffer-p
      :description (lambda ()
                     (format "%s %s"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :down-arrow)
+                             (casual-dired-unicode-get :down-arrow)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :subdir)))
+                            (casual-dired-unicode-get :subdir)))
      :transient t)
     ("j" " → 📄…" dired-goto-file
      :description (lambda ()
                     (format "%s %s…"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :goto)
+                             (casual-dired-unicode-get :goto)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :file)))
+                            (casual-dired-unicode-get :file)))
      :transient t)
     ("G" " → 🗂️…" dired-goto-subdir
      :description (lambda ()
                     (format "%s %s…"
                             (casual-dired-format-arrow
-                             (casual-dired-unicode-db-get :goto)
+                             (casual-dired-unicode-get :goto)
                              casual-dired-use-unicode-symbols)
-                            (casual-dired-unicode-db-get :subdir)))
+                            (casual-dired-unicode-get :subdir)))
      :transient t)]]
 
   [["Quick"
@@ -187,7 +188,7 @@
   [:class transient-row
           ("RET" "Open" dired-find-file :transient nil)
           ("," "Settings" casual-dired-settings-tmenu :transient nil)
-          (casual-dired-quit-all)
+          (casual-lib-quit-all)
           ("q" "Quit Dired" quit-window)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()
@@ -199,8 +200,8 @@
    ("C" "Files To Copy…" dired-do-copy-regexp :transient nil)
    ("r" "Files To Rename…" dired-do-rename-regexp :transient nil)]
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 (transient-define-prefix casual-dired-change-tmenu ()
   ["Change"
@@ -209,8 +210,8 @@
     ("O" "Owner…" dired-do-chown :transient t)]
    [("T" "Touch" dired-do-touch :transient t)]]
   [:class transient-row
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-one)
+          (casual-lib-quit-all)])
 
 ;;; Functions
 (defun casual-dired--identify-image (filename)
@@ -259,21 +260,6 @@ This buffer is created by the command `find-lisp-find-dired'."
   (find-lisp-find-dired default-directory REGEXP))
 
 ;;; Labels
-(defun casual-dired--variable-to-checkbox (v)
-  "Checkbox string representation of variable V.
-V is either nil or non-nil."
-  (if casual-dired-use-unicode-symbols
-      (if v "☑︎" "◻︎")
-    (if v "[x]" "[ ]")))
-
-(defun casual-dired--prefix-label (label prefix)
-  "Label constructed with PREFIX and LABEL separated by a space."
-  (format "%s %s" prefix label))
-
-(defun casual-dired--checkbox-label (v label)
-  "Checkbox label using variable V and LABEL."
-  (casual-dired--prefix-label label (casual-dired--variable-to-checkbox v)))
-
 (defun casual-dired-format-arrow (buf typeset)
   "If TYPESET is non-nil, then format BUF string to have space."
   (if typeset

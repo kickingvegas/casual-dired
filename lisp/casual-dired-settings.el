@@ -26,6 +26,7 @@
 (require 'transient)
 (require 'dired)
 (require 'wdired)
+(require 'casual-lib)
 (require 'casual-dired-utils)
 (require 'casual-dired-variables)
 (require 'casual-dired-version)
@@ -34,20 +35,31 @@
 (transient-define-prefix casual-dired-settings-tmenu ()
   ["Dired Settings"
    ["Customize"
-    ("T" "Use System Trash Can"
-     casual-dired--customize-delete-by-moving-to-trash
-     :transient nil)
     ("r" "Revert Policy"
      casual-dired--customize-dired-auto-revert-buffer
      :transient nil)
     ("t" "Target Directory"
      casual-dired--customize-dired-dwim-target
      :transient nil)
-    ("u" "Use Unicode Symbols"
-     casual-dired--customize-casual-dired-use-unicode-symbols
+    ("T" "Use System Trash Can"
+     casual-dired--customize-delete-by-moving-to-trash
+     :description (lambda ()
+                   (casual-lib-checkbox-label
+                    delete-by-moving-to-trash
+                    "Use System Trash Can"))
      :transient nil)
+    ("u" "Use Unicode Symbols"
+     casual-lib-customize-casual-lib-use-unicode
+     :description (lambda ()
+                    (casual-lib-checkbox-label
+                     casual-lib-use-unicode
+                     "Use Unicode Symbols")))
     ("R" "Rename via VC"
      casual-dired--customize-dired-vc-rename-file
+     :description (lambda ()
+                   (casual-lib-checkbox-label
+                    dired-vc-rename-file
+                    "Rename via VC"))
      :transient nil)]
 
    ["GNU ‘ls’"
@@ -64,10 +76,18 @@
   [["wdired"
     ("p" "Allow Changing Permissions"
      casual-dired--customize-wdired-allow-to-change-permissions
+     :description (lambda ()
+                   (casual-lib-checkbox-label
+                    wdired-allow-to-change-permissions
+                    "Allow Changing Permissions"))
      :transient nil)
 
     ("L" "Allow Redirecting Links"
      casual-dired--customize-wdired-allow-to-redirect-links
+     :description (lambda ()
+                   (casual-lib-checkbox-label
+                    wdired-allow-to-redirect-links
+                    "Allow Redirecting Links"))
      :transient nil)]
 
    ["Dired"
@@ -76,10 +96,10 @@
      :transient nil)]]
 
   [:class transient-row
+          (casual-lib-quit-one)
           ("a" "About" casual-dired-about :transient nil)
           ("v" "Version" casual-dired-version :transient nil)
-          (casual-dired-quit-one)
-          (casual-dired-quit-all)])
+          (casual-lib-quit-all)])
 
 ;;; Functions
 
@@ -139,14 +159,6 @@ recommended to set both `dired-listing-switches' and
 `casual-dired-listing-switches' to be consistent with each other."
   (interactive)
   (customize-variable 'casual-dired-listing-switches))
-
-(defun casual-dired--customize-casual-dired-use-unicode-symbols ()
-  "Customize `casual-dired-use-unicode-symbols'.
-
-Customize Casual Dired to use Unicode symbols in place of strings
-when appropriate."
-  (interactive)
-  (customize-variable 'casual-dired-use-unicode-symbols))
 
 (defun casual-dired--customize-delete-by-moving-to-trash ()
   "Customize `delete-by-moving-to-trash'.
