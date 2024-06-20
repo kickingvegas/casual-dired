@@ -24,6 +24,7 @@
 
 ;;; Code:
 (require 'dired)
+(require 'casual-lib)
 
 (defcustom casual-dired-listing-switches '("--all"
                                            "--human-readable"
@@ -57,11 +58,14 @@ See the man page `ls(1)' for details."
   :type '(repeat string)
   :group 'dired)
 
+(define-obsolete-variable-alias 'casual-dired-use-unicode-symbols
+  'casual-lib-use-unicode
+  "1.4.0")
+
 (defcustom casual-dired-use-unicode-symbols nil
   "If non-nil then use Unicode symbols whenever appropriate for labels."
   :type 'boolean
   :group 'dired)
-
 
 (provide 'casual-dired-variables)
 ;;; casual-dired-variables.el ends here
