@@ -48,12 +48,8 @@
                     delete-by-moving-to-trash
                     "Use System Trash Can"))
      :transient nil)
-    ("u" "Use Unicode Symbols"
-     casual-lib-customize-casual-lib-use-unicode
-     :description (lambda ()
-                    (casual-lib-checkbox-label
-                     casual-lib-use-unicode
-                     "Use Unicode Symbols")))
+    (casual-lib-customize-unicode)
+    (casual-lib-customize-hide-navigation)
     ("R" "Rename via VC"
      casual-dired--customize-dired-vc-rename-file
      :description (lambda ()
