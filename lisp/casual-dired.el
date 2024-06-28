@@ -5,8 +5,8 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.4.0
-;; Package-Requires: ((emacs "29.1") (casual-lib "1.0.0"))
+;; Version: 1.5.0
+;; Package-Requires: ((emacs "29.1") (casual-lib "1.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -186,9 +186,9 @@
     ("F" "File" dired-create-empty-file :transient t)]]
 
   [:class transient-row
+          (casual-lib-quit-one)
           ("RET" "Open" dired-find-file :transient nil)
           ("," "Settings" casual-dired-settings-tmenu :transient nil)
-          (casual-lib-quit-all)
           ("q" "Quit Dired" quit-window)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()

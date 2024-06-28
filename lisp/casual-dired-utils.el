@@ -114,22 +114,5 @@ ASCII-range string."
           (casual-lib-quit-one)
           (casual-lib-quit-all)])
 
-;; Transient Navigation
-(transient-define-suffix casual-lib-quit-all ()
-  "Dismiss all menus."
-  :transient nil
-  :key "C-q"
-  :description "Dismiss"
-  (interactive)
-  (transient-quit-all))
-
-(transient-define-suffix casual-lib-quit-one ()
-  "Go back to previous menu."
-  :transient nil
-  :key "C-g"
-  :description "‹Back"
-  (interactive)
-  (transient-quit-one))
-
 (provide 'casual-dired-utils)
 ;;; casual-dired-utils.el ends here
