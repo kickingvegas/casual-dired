@@ -90,7 +90,7 @@
   (casualt-breakdown t))
 
 (ert-deftest test-casual-dired-unicode-get ()
-  (let ((casual-dired-use-unicode-symbols nil))
+  (let ((casual-lib-use-unicode nil))
     (should (string-equal (casual-dired-unicode-get :up-arrow) "Up"))
     (should (string-equal (casual-dired-unicode-get :down-arrow) "Down"))
     (should (string-equal (casual-dired-unicode-get :goto) "Goto"))
@@ -98,7 +98,7 @@
     (should (string-equal (casual-dired-unicode-get :file) "File"))
     (should (string-equal (casual-dired-unicode-get :subdir) "Subdir")))
 
-  (let ((casual-dired-use-unicode-symbols t))
+  (let ((casual-lib-use-unicode t))
     (should (string-equal (casual-dired-unicode-get :up-arrow) "↑"))
     (should (string-equal (casual-dired-unicode-get :down-arrow) "↓"))
     (should (string-equal (casual-dired-unicode-get :goto) "→"))
