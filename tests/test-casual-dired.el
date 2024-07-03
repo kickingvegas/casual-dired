@@ -68,7 +68,7 @@
     (push (casualt-suffix-test-vector "ðq" #'dired-prev-dirline) test-vectors)
     (push (casualt-suffix-test-vector "îq" #'dired-next-dirline) test-vectors)
     (push (casualt-suffix-test-vector "j" #'dired-goto-file) test-vectors)
-    (push (casualt-suffix-test-vector "G" #'dired-goto-subdir) test-vectors)
+    (push (casualt-suffix-test-vector "ê" #'dired-goto-subdir) test-vectors)
     ;;(push (casualt-suffix-test-vector "[" #'dired-prev-subdir) test-vectors)
     ;;(push (casualt-suffix-test-vector "]" #'dired-next-subdir) test-vectors)
 

@@ -163,7 +163,7 @@
                              casual-dired-use-unicode-symbols)
                             (casual-dired-unicode-get :file)))
      :transient t)
-    ("G" " → 🗂️…" dired-goto-subdir
+    ("M-j" " → 🗂️…" dired-goto-subdir
      :description (lambda ()
                     (format "%s %s…"
                             (casual-dired-format-arrow
