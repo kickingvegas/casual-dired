@@ -1,4 +1,5 @@
 [[https://melpa.org/#/casual-dired][file:https://melpa.org/packages/casual-dired-badge.svg]]
+
 * Casual Dired
 An opinionated [[https://github.com/magit/transient][Transient]]-based porcelain for the Emacs file manager [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
 
