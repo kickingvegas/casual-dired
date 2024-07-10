@@ -27,7 +27,8 @@
 
 ;; INSTALLATION
 ;; (require 'casual-dired)
-;; (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
+;; (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+;; (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu) ; optional
 
 ;;; Code:
 (require 'transient)
