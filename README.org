@@ -36,15 +36,18 @@ As Casual Dired is new, we are looking for early adopters! Your [[https://github
 * Install
 If installed via MELPA then add these lines to your Emacs initialization file with your binding of preference. 
 #+begin_src elisp :lexical no
-  (require 'casual-dired) ;; optional
-  (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
+  (require 'casual-dired) 
+  (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+  (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu) ; optional
 #+end_src
 
 If you use ~use-package~, here is the recipe for installing it.
 #+begin_src elisp :lexical no
   (use-package casual-dired
     :ensure t
-    :bind (:map dired-mode-map ("C-o" . #'casual-dired-tmenu)))
+    :bind (:map dired-mode-map
+                ("C-o" . #'casual-dired-tmenu)
+                ("s" . #'casual-dired-sort-by-tmenu)))
 #+end_src
 
 In addition, you may wish to directly sort the Dired buffer by different criteria. Binding ~s~ (or one of your choosing) to ~casual-dired-sort-by-tmenu~ will accomplish this. Look below in the Configuration section to see how this can be done.
@@ -85,10 +88,14 @@ As Dired has been around for a long time, the different ways of configuring it a
 #+begin_src elisp :lexical no
   (require 'dired)
   (require 'dired-x)
-  (require 'cclisp)
   (require 'wdired)
+  (require 'hl-line)
+  (require 'mouse)
   (require 'image-dired)
   (require 'casual-dired)
+
+  (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+  (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu)
 
   (add-hook 'dired-mode-hook 'hl-line-mode)
   (add-hook 'dired-mode-hook 'context-menu-mode)
@@ -98,19 +105,18 @@ As Dired has been around for a long time, the different ways of configuring it a
    (lambda ()
      (setq-local mouse-1-click-follows-link 'double)))
 
-  (define-key dired-mode-map (kbd "M-o") #'dired-omit-mode)
-  (define-key dired-mode-map (kbd "E") #'wdired-change-to-wdired-mode)
-  (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
-  (define-key dired-mode-map (kbd "s") #'casual-dired-sort-by-tmenu)
-  (define-key dired-mode-map (kbd "M-n") #'dired-next-dirline)
-  (define-key dired-mode-map (kbd "M-p") #'dired-prev-dirline)
-  (define-key dired-mode-map (kbd "]") #'dired-next-subdir)
-  (define-key dired-mode-map (kbd "[") #'dired-prev-subdir)
-  (define-key dired-mode-map (kbd "A-M-<mouse-1>") #'browse-url-of-dired-file)
+  (keymap-set dired-mode-map "M-o" #'dired-omit-mode)
+  (keymap-set dired-mode-map "E" #'wdired-change-to-wdired-mode)
+  (keymap-set dired-mode-map "M-n" #'dired-next-dirline)
+  (keymap-set dired-mode-map "M-p" #'dired-prev-dirline)
+  (keymap-set dired-mode-map "]" #'dired-next-subdir)
+  (keymap-set dired-mode-map "[" #'dired-prev-subdir)
+  (keymap-set dired-mode-map "A-M-<mouse-1>" #'browse-url-of-dired-file)
+  (keymap-set dired-mode-map "<backtab>" #'dired-prev-subdir)
+  (keymap-set dired-mode-map "TAB" #'dired-next-subdir)
 
-  (define-key image-dired-thumbnail-mode-map (kbd "n") #'image-dired-display-next)
-  (define-key image-dired-thumbnail-mode-map (kbd "p") #'image-dired-display-previous)
-  
+  (keymap-set image-dired-thumbnail-mode-map "n" #'image-dired-display-next)
+  (keymap-set image-dired-thumbnail-mode-map "p" #'image-dired-display-previous)
 #+end_src
 
 ** Variables
@@ -166,10 +172,11 @@ To get all current and future Casual porcelains, please install [[https://github
 
 Porcelains currently supported by Casual are listed below:
 
-- [[https://github.com/kickingvegas/casual-avy][Casual Avy]] - a Transient porcelain for [[https://github.com/abo-abo/avy][Avy]].
+- [[https://github.com/kickingvegas/casual-ibuffer][Casual IBuffer]] - a Transient porcelain for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffer-Menus.html][IBuffer]].  
 - [[https://github.com/kickingvegas/casual-calc][Casual Calc]] - a Transient porcelain for [[https://www.gnu.org/software/emacs/manual/html_mono/calc.html][Calc]].
 - [[https://github.com/kickingvegas/casual-info][Casual Info]] - a Transient porcelain for the [[https://www.gnu.org/software/emacs/manual/html_node/info/][Info]] reader.  
 - [[https://github.com/kickingvegas/casual-isearch][Casual I-Search]] - a Transient menu for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Incremental-Search.html][I-Search]].
+- [[https://github.com/kickingvegas/casual-avy][Casual Avy]] - a Transient porcelain for [[https://github.com/abo-abo/avy][Avy]].
 
 Users who prefer finer grained control over package installation can install each porcelain above individually.
 

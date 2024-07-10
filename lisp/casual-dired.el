@@ -5,7 +5,7 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.6.0
+;; Version: 1.6.1
 ;; Package-Requires: ((emacs "29.1") (casual-lib "1.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,8 @@
 
 ;; INSTALLATION
 ;; (require 'casual-dired)
-;; (define-key dired-mode-map (kbd "C-o") #'casual-dired-tmenu)
+;; (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
+;; (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu) ; optional
 
 ;;; Code:
 (require 'transient)
