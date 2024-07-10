@@ -25,6 +25,7 @@
 ;;; Code:
 (require 'transient)
 (require 'dired)
+(require 'dired-aux)
 (require 'wdired)
 (require 'casual-lib)
 (require 'casual-dired-utils)
