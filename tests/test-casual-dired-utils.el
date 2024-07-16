@@ -50,12 +50,12 @@
   (casualt-setup)
 
   (let ((test-vectors (list)))
-    (push (casualt-suffix-test-vector "f" #'dired-do-find-regexp) test-vectors)
+    (push (casualt-suffix-test-vector "g" #'dired-do-find-regexp) test-vectors)
     (push (casualt-suffix-test-vector "" #'dired-do-isearch) test-vectors)
     (push (casualt-suffix-test-vector "ó" #'dired-do-isearch-regexp) test-vectors)
     (push (casualt-suffix-test-vector "s" #'dired-do-search) test-vectors)
     (push (casualt-suffix-test-vector "r" #'dired-do-query-replace-regexp) test-vectors)
-    (push (casualt-suffix-test-vector "F" #'dired-do-find-regexp-and-replace) test-vectors)
+    (push (casualt-suffix-test-vector "G" #'dired-do-find-regexp-and-replace) test-vectors)
 
     (casualt-suffix-testbench-runner test-vectors
                                      #'casual-dired-search-replace-tmenu

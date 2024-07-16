@@ -179,8 +179,10 @@
     ("b" "List Buffers" ibuffer :transient nil)]
 
    ["Search"
+    :pad-keys t
     ("C-s" "I-Search…" dired-isearch-filenames :transient nil)
-    ("M-s" "I-Search Regexp…" dired-isearch-filenames-regexp :transient nil)]
+    ("M-s" "I-Search Regexp…" dired-isearch-filenames-regexp :transient nil)
+    ("/" "Search & Replace›" casual-dired-search-replace-tmenu :transient nil)]
 
    ["New"
     ("+" "Directory" dired-create-directory :transient t)
@@ -189,7 +191,7 @@
   [:class transient-row
           (casual-lib-quit-one)
           ("RET" "Open" dired-find-file :transient nil)
-          ("," "Settings" casual-dired-settings-tmenu :transient nil)
+          ("," "Settings›" casual-dired-settings-tmenu :transient nil)
           ("q" "Quit Dired" quit-window)])
 
 (transient-define-prefix casual-dired-regexp-tmenu ()
