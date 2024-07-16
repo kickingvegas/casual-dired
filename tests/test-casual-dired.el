@@ -42,31 +42,31 @@
     ;;("&" dired-do-async-shell-command)
     (push (casualt-suffix-test-vector "W" #'browse-url-of-dired-file) test-vectors)
 
-    (push (casualt-suffix-test-vector "sq" #'casual-dired-sort-by-tmenu) test-vectors)
-    (push (casualt-suffix-test-vector "hq" #'dired-hide-details-mode) test-vectors)
-    (push (casualt-suffix-test-vector "Oq" #'dired-omit-mode) test-vectors)
+    (push (casualt-suffix-test-vector "s" #'casual-dired-sort-by-tmenu) test-vectors)
+    (push (casualt-suffix-test-vector "h" #'dired-hide-details-mode) test-vectors)
+    (push (casualt-suffix-test-vector "O" #'dired-omit-mode) test-vectors)
     ;; (push (casualt-suffix-test-vector "iq" #'dired-maybe-insert-subdir 2) test-vectors)
-    (push (casualt-suffix-test-vector "$q" #'dired-hide-subdir) test-vectors)
-    (push (casualt-suffix-test-vector "kq" #'dired-do-kill-lines) test-vectors)
-    (push (casualt-suffix-test-vector "gq" #'revert-buffer) test-vectors)
+    (push (casualt-suffix-test-vector "$" #'dired-hide-subdir) test-vectors)
+    (push (casualt-suffix-test-vector "k" #'dired-do-kill-lines) test-vectors)
+    (push (casualt-suffix-test-vector "g" #'revert-buffer) test-vectors)
     (push (casualt-suffix-test-vector "f" #'casual-dired-find-dired-regexp) test-vectors)
     (push (casualt-suffix-test-vector "E" #'wdired-change-to-wdired-mode) test-vectors)
     ;;(push (casualt-suffix-test-vector "T" image-dired) test-vectors)
-    (push (casualt-suffix-test-vector "Iq" #'casual-dired-image-info) test-vectors)
+    (push (casualt-suffix-test-vector "I" #'casual-dired-image-info) test-vectors)
 
-    (push (casualt-suffix-test-vector "mq" #'dired-mark) test-vectors)
-    (push (casualt-suffix-test-vector "uq" #'dired-unmark) test-vectors)
-    (push (casualt-suffix-test-vector "Uq" #'dired-unmark-all-marks) test-vectors)
-    (push (casualt-suffix-test-vector "tq" #'dired-toggle-marks) test-vectors)
-    (push (casualt-suffix-test-vector "~q" #'dired-flag-backup-files) test-vectors)
-    (push (casualt-suffix-test-vector "xq" #'dired-do-flagged-delete) test-vectors)
+    (push (casualt-suffix-test-vector "m" #'dired-mark) test-vectors)
+    (push (casualt-suffix-test-vector "u" #'dired-unmark) test-vectors)
+    (push (casualt-suffix-test-vector "U" #'dired-unmark-all-marks) test-vectors)
+    (push (casualt-suffix-test-vector "t" #'dired-toggle-marks) test-vectors)
+    (push (casualt-suffix-test-vector "~" #'dired-flag-backup-files) test-vectors)
+    (push (casualt-suffix-test-vector "x" #'dired-do-flagged-delete) test-vectors)
     (push (casualt-suffix-test-vector "r" #'casual-dired-regexp-tmenu) test-vectors)
 
-    (push (casualt-suffix-test-vector "^q" #'dired-up-directory) test-vectors)
-    (push (casualt-suffix-test-vector "pq" #'dired-previous-line) test-vectors)
-    (push (casualt-suffix-test-vector "nq" #'dired-next-line) test-vectors)
-    (push (casualt-suffix-test-vector "ðq" #'dired-prev-dirline) test-vectors)
-    (push (casualt-suffix-test-vector "îq" #'dired-next-dirline) test-vectors)
+    (push (casualt-suffix-test-vector "^" #'dired-up-directory) test-vectors)
+    (push (casualt-suffix-test-vector "p" #'dired-previous-line) test-vectors)
+    (push (casualt-suffix-test-vector "n" #'dired-next-line) test-vectors)
+    (push (casualt-suffix-test-vector "ð" #'dired-prev-dirline) test-vectors)
+    (push (casualt-suffix-test-vector "î" #'dired-next-dirline) test-vectors)
     (push (casualt-suffix-test-vector "j" #'dired-goto-file) test-vectors)
     (push (casualt-suffix-test-vector "ê" #'dired-goto-subdir) test-vectors)
     ;;(push (casualt-suffix-test-vector "[" #'dired-prev-subdir) test-vectors)
@@ -76,14 +76,17 @@
     (push (casualt-suffix-test-vector "B" #'bookmark-set-no-overwrite) test-vectors)
     (push (casualt-suffix-test-vector "b" #'ibuffer) test-vectors)
 
-    ;;(push (casualt-suffix-test-vector "" dired-isearch-filenames) test-vectors)
+    ;;(push (casualt-suffix-test-vector "" dired-isearch-filenames) test-vectors)
     (push (casualt-suffix-test-vector "ó" #'dired-isearch-filenames-regexp) test-vectors)
+    (push (casualt-suffix-test-vector "/" #'casual-dired-search-replace-tmenu) test-vectors)
+
     ;;(push (casualt-suffix-test-vector "+q" #'dired-create-directory) test-vectors)
-    (push (casualt-suffix-test-vector "Fq" #'dired-create-empty-file) test-vectors)
+    (push (casualt-suffix-test-vector "F" #'dired-create-empty-file) test-vectors)
 
     (casualt-suffix-testbench-runner test-vectors
                                      #'casual-dired-tmenu
                                      '(lambda () (random 5000))))
+
   (casualt-breakdown t))
 
 
@@ -104,10 +107,10 @@
 (ert-deftest test-casual-dired-change-tmenu-bindings ()
   (casualt-setup)
   (let ((test-vectors (list)))
-    (push (casualt-suffix-test-vector "Mq" #'dired-do-chmod) test-vectors)
-    (push (casualt-suffix-test-vector "Gq" #'dired-do-chgrp) test-vectors)
-    (push (casualt-suffix-test-vector "Oq" #'dired-do-chown) test-vectors)
-    (push (casualt-suffix-test-vector "Tq" #'dired-do-touch) test-vectors)
+    (push (casualt-suffix-test-vector "M" #'dired-do-chmod) test-vectors)
+    (push (casualt-suffix-test-vector "G" #'dired-do-chgrp) test-vectors)
+    (push (casualt-suffix-test-vector "O" #'dired-do-chown) test-vectors)
+    (push (casualt-suffix-test-vector "T" #'dired-do-touch) test-vectors)
 
     (casualt-suffix-testbench-runner test-vectors
                                      #'casual-dired-change-tmenu

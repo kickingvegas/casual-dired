@@ -74,14 +74,16 @@ ASCII-range string."
   ["Search & Replace"
    ["Search in Files"
      :pad-keys t
-     ("f" "Find regexp…" dired-do-find-regexp :transient nil)
      ("C-s" "I-search…" dired-do-isearch :transient nil)
      ("M-s" "I-search regexp…" dired-do-isearch-regexp :transient nil)
      ("s" "Search first regexp match…" dired-do-search :transient nil)]
 
     ["Replace in Files"
-     ("F" "Find regexp and replace…" dired-do-find-regexp-and-replace :transient nil)
      ("r" "Query regexp and replace…" dired-do-query-replace-regexp :transient nil)]]
+
+  ["grep-style regex"
+   ("g" "Find regex…" dired-do-find-regexp :transient nil)
+   ("G" "Find regex and replace…" dired-do-find-regexp-and-replace :transient nil)]
 
   [:class transient-row
           (casual-lib-quit-one)
