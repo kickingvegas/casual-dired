@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Casual Dired is an opinionated Transient-based porcelain for Emacs Dired.
+;; Casual Dired is an opinionated Transient-based user interface for Emacs Dired.
 
 ;; INSTALLATION
 ;; (require 'casual-dired)
