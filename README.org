@@ -1,7 +1,7 @@
 [[https://melpa.org/#/casual-dired][file:https://melpa.org/packages/casual-dired-badge.svg]]
 
 * Casual Dired
-An opinionated [[https://github.com/magit/transient][Transient]]-based porcelain for the Emacs file manager [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
+An opinionated [[https://github.com/magit/transient][Transient]]-based user interface for the Emacs file manager [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired]].
 
 [[file:docs/images/casual-dired-screenshot.png]]
 
@@ -189,20 +189,20 @@ If you enjoy using Casual Dired, consider making a modest financial contribution
 [[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
 
 * See Also
-Casual Dired is part of a suite of porcelains for different Emacs packages.
+Casual Dired is part of a suite of user interfaces for different Emacs packages.
 
-To get all current and future Casual porcelains, please install [[https://github.com/kickingvegas/casual-suite][Casual Suite]] from [[https://melpa.org/#/casual-suite][MELPA]].
+To get all current and future Casual user interfaces, please install [[https://github.com/kickingvegas/casual-suite][Casual Suite]] from [[https://melpa.org/#/casual-suite][MELPA]].
 
-Porcelains currently supported by Casual are listed below:
+User Interfaces currently supported by Casual are listed below:
 
-- [[https://github.com/kickingvegas/casual-ibuffer][Casual IBuffer]] - a Transient porcelain for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffer-Menus.html][IBuffer]].  
-- [[https://github.com/kickingvegas/casual-calc][Casual Calc]] - a Transient porcelain for [[https://www.gnu.org/software/emacs/manual/html_mono/calc.html][Calc]].
-- [[https://github.com/kickingvegas/casual-info][Casual Info]] - a Transient porcelain for the [[https://www.gnu.org/software/emacs/manual/html_node/info/][Info]] reader.  
+- [[https://github.com/kickingvegas/casual-ibuffer][Casual IBuffer]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffer-Menus.html][IBuffer]].  
+- [[https://github.com/kickingvegas/casual-calc][Casual Calc]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_mono/calc.html][Calc]].
+- [[https://github.com/kickingvegas/casual-info][Casual Info]] - a Transient user interface for the [[https://www.gnu.org/software/emacs/manual/html_node/info/][Info]] reader.  
 - [[https://github.com/kickingvegas/casual-isearch][Casual I-Search]] - a Transient menu for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Incremental-Search.html][I-Search]].
-- [[https://github.com/kickingvegas/casual-re-builder][Casual RE-Builder]] - a Transient porcelain for [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regular-Expressions.html][RE-Builder]].    
-- [[https://github.com/kickingvegas/casual-avy][Casual Avy]] - a Transient porcelain for [[https://github.com/abo-abo/avy][Avy]].
+- [[https://github.com/kickingvegas/casual-re-builder][Casual RE-Builder]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regular-Expressions.html][RE-Builder]].    
+- [[https://github.com/kickingvegas/casual-avy][Casual Avy]] - a Transient user interface for [[https://github.com/abo-abo/avy][Avy]].
 
-Users who prefer finer grained control over package installation can install each porcelain above individually.
+Users who prefer finer grained control over package installation can install each user interface above individually.
 
 * Acknowledgments
 A heartfelt thanks to all the contributors to Dired and [[https://github.com/magit/transient][Transient]]. Casual Dired would not be possible without your efforts.
