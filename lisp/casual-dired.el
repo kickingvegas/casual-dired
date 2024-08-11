@@ -29,9 +29,17 @@
 ;; (require 'casual-dired)
 ;; (keymap-set dired-mode-map "C-o" #'casual-dired-tmenu)
 ;; (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu) ; optional
+;; (keymap-set dired-mode-map "/" #'casual-dired-search-replace-tmenu) ; optional
+
+;; Alternately, install using `use-package':
+;; (use-package casual-dired
+;;   :ensure t
+;;   :bind (:map dired-mode-map
+;;               ("C-o" . #'casual-dired-tmenu)
+;;               ("s" . #'casual-dired-sort-by-tmenu)
+;;               ("/" . #'casual-dired-search-replace-tmenu)))
 
 ;;; Code:
-(require 'transient)
 (require 'dired)
 (require 'dired-x)
 (require 'wdired)
@@ -49,14 +57,18 @@
   "Transient menu for Dired."
   [["File"
     ("o" "Open Other" dired-find-file-other-window :transient nil)
-    ("C" "Copy to…" dired-do-copy :transient nil)
-    ("R" "Rename…" dired-do-rename :transient nil)
-    ("D" "Delete…" dired-do-delete :transient nil)
+    ("C" "Copy to…" dired-do-copy :transient t)
+    ("R" "Rename…" dired-do-rename :transient t)
+    ("D" "Delete…" dired-do-delete :transient t)
     ("S" "Symlink…" dired-do-symlink :transient nil)
     ("c" "Change›" casual-dired-change-tmenu :transient nil)
+    ("y" "Type" dired-show-file-type :transient t)
     ("w" "Copy Name" dired-copy-filename-as-kill :transient nil)
     ("!" "Shell…" dired-do-shell-command :transient nil)
     ("&" "Shell &… " dired-do-async-shell-command :transient nil)
+    (";" "Thumbnail" image-dired-dired-toggle-marked-thumbs
+     :if display-graphic-p
+     :transient t)
     ("W" "Browse" browse-url-of-dired-file :transient nil)]
 
    ["Directory"
@@ -84,7 +96,7 @@
     ("f" "Filter…" casual-dired-find-dired-regexp :transient nil)
     ("E" "Edit (wdired)" wdired-change-to-wdired-mode :transient nil)
     ("T" "Thumbnails…" image-dired :if display-graphic-p :transient n)
-    ("I" "Image Info" casual-dired-image-info :transient t)]
+    ("d" "Dired…" dired :transient t)]
 
    ["Mark"
     ("m" "Mark" dired-mark :transient t)
@@ -217,33 +229,9 @@
           (casual-lib-quit-all)])
 
 ;;; Functions
-(defun casual-dired--identify-image (filename)
-  "Get image information of FILENAME via Imagemagick identify utility."
-  (car
-   (process-lines
-    "identify"
-    "-format"
-    "%m %wx%h %b"
-    (expand-file-name filename))))
-
 (defun casual-dired-image-file-p ()
   "Predicate if current file in Dired is an image file."
   (string-match-p (image-dired--file-name-regexp) (dired-get-filename)))
-
-(defun casual-dired-image-info ()
-  "Message image info in the minibuffer and push into `kill-ring'."
-  (interactive)
-  (if (casual-dired-image-file-p)
-    (let* ((filename (dired-get-filename))
-           (image-info (casual-dired--identify-image filename))
-           (output (concat image-info
-                           " "
-                           (file-name-base filename)
-                           "."
-                           (file-name-extension filename))))
-      (message output)
-      (kill-new output))
-    (message "Not an image file.")))
 
 (defun casual-dired-lisp-dired-buffer-p ()
   "Predicate if buffer name is “*Find Lisp Dired*”.

@@ -23,8 +23,6 @@
 ;;
 
 ;;; Code:
-
-(require 'transient)
 (require 'dired)
 (require 'dired-x)
 (require 'checkdoc)
