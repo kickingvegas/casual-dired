@@ -23,7 +23,6 @@
 ;;
 
 ;;; Code:
-(require 'transient)
 (require 'dired)
 (require 'dired-aux)
 (require 'wdired)

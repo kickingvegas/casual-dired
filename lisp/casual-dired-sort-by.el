@@ -38,15 +38,15 @@
 ;; (see `context-menu-mode') or some other main menu.
 ;;
 ;; Typically this is done with code looking like this:
-;;
+
 ;; (defun casual-dired-context-menu-addons (menu click)
-;;   (easy-menu-add-item menu nil casual-dired-dired-sort-menu))
-;;
+;;   "Customize context MENU with CLICK event."
+;;   (easy-menu-add-item menu nil casual-dired-sort-menu)
+;;   menu)
 ;; (add-hook 'context-menu-functions #'casual-dired-context-menu-addons)
 
 ;;; Code:
 (require 'dired)
-(require 'transient)
 (require 'easymenu)
 (require 'mouse)
 (require 'casual-lib)
