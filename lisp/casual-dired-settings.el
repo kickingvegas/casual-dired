@@ -23,7 +23,6 @@
 ;;
 
 ;;; Code:
-(require 'transient)
 (require 'dired)
 (require 'dired-aux)
 (require 'wdired)
@@ -187,7 +186,7 @@ If non-nil, the permissions bits of the files are editable."
   (customize-group "dired"))
 
 (defun casual-dired-about-dired ()
-  "Casual Dired is an opinionated porcelain for the Emacs file manager Dired.
+  "Casual Dired is an opinionated user interface for the Emacs file manager Dired.
 
 Learn more about using Casual Dired at our discussion group on GitHub.
 Any questions or comments about Casual should be made there.
