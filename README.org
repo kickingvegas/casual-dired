@@ -19,6 +19,9 @@ While highly functional, Dired has a steep learning curve as it relies on single
 - UX Stability (for now). Given that Casual Dired is early in its life-cycle, expect changes to its user experience in terms of menu hierarchy and keybinding choices in future releases.
 
 * Requirements
+Casual Dired requires usage of
+- Emacs ≥ 29.1
+- Casual Lib ≥ 1.1.0
 
 Casual Dired has been verified with the following configuration. 
 - Emacs 29.3 (macOS 14.4.1, Ubuntu Linux 22.04.4 LTS)
@@ -68,7 +71,11 @@ Included is a standard keymap for Dired sorting commands (~casual-dired-sort-men
 
 For users running on Microsoft Windows, use [[https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Dired-ls.html][this guidance]] to configure GNU ~ls~ for running with Dired.
 
-Casual requires Emacs 29.1+.
+** A Note on Package Dependencies
+Casual Dired requires Casual Lib which in turn requires a recent installation of Transient 0.6.0+ from either [[https://elpa.gnu.org/packages/transient.html][ELPA]] or [[https://melpa.org/#/transient][MELPA]]. As an older version of Transient is built-in to the Emacs release, the package manager ~package.el~ will /not/ update this package unless the customizable variable ~package-install-upgrade-built-in~ is set to ~t~. Set this variable and proceed with installing Casual Dired. Alternately invoking ~package-install~ with a prefix (~C-u~) will temporarily coerce the update of the built-in package. (example: ~C-u M-x package-install~ ~casual-dired~)
+
+As Transient is closely tied to Magit, installing the latest version of Magit (via [[https://elpa.nongnu.org/nongnu/magit.html][non-GNU ELPA]] or [[https://melpa.org/#/magit][MELPA]]) before installing Casual Dired can also pick up the latest version of Transient.
+
 
 * Usage
 1. Invoke ~M-x dired~ to launch Dired.
@@ -188,21 +195,11 @@ If you enjoy using Casual Dired, consider making a modest financial contribution
 
 [[https://www.buymeacoffee.com/kickingvegas][file:docs/images/default-yellow.png]]
 
+
 * See Also
-Casual Dired is part of a suite of user interfaces for different Emacs packages.
+Casual Dired is part of a suite of user interfaces for different Emacs packages called [[https://github.com/kickingvegas/casual-suite][Casual Suite]].
 
-To get all current and future Casual user interfaces, please install [[https://github.com/kickingvegas/casual-suite][Casual Suite]] from [[https://melpa.org/#/casual-suite][MELPA]].
-
-User Interfaces currently supported by Casual are listed below:
-
-- [[https://github.com/kickingvegas/casual-ibuffer][Casual IBuffer]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffer-Menus.html][IBuffer]].  
-- [[https://github.com/kickingvegas/casual-calc][Casual Calc]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_mono/calc.html][Calc]].
-- [[https://github.com/kickingvegas/casual-info][Casual Info]] - a Transient user interface for the [[https://www.gnu.org/software/emacs/manual/html_node/info/][Info]] reader.  
-- [[https://github.com/kickingvegas/casual-isearch][Casual I-Search]] - a Transient menu for [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Incremental-Search.html][I-Search]].
-- [[https://github.com/kickingvegas/casual-re-builder][Casual RE-Builder]] - a Transient user interface for [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regular-Expressions.html][RE-Builder]].    
-- [[https://github.com/kickingvegas/casual-avy][Casual Avy]] - a Transient user interface for [[https://github.com/abo-abo/avy][Avy]].
-
-Users who prefer finer grained control over package installation can install each user interface above individually.
+Different interfaces include those for I-Search, Info, Calc, Bookmarks, RE-Builder, IBuffer, and others. Learn more about them today!
 
 * Acknowledgments
 A heartfelt thanks to all the contributors to Dired and [[https://github.com/magit/transient][Transient]]. Casual Dired would not be possible without your efforts.

@@ -5,7 +5,7 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.8.0
+;; Version: 1.8.1
 ;; Package-Requires: ((emacs "29.1") (casual-lib "1.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -33,11 +33,17 @@
 
 ;; Alternately, install using `use-package':
 ;; (use-package casual-dired
-;;   :ensure t
+;;   :ensure nil
 ;;   :bind (:map dired-mode-map
 ;;               ("C-o" . #'casual-dired-tmenu)
 ;;               ("s" . #'casual-dired-sort-by-tmenu)
 ;;               ("/" . #'casual-dired-search-replace-tmenu)))
+
+;; NOTE: This package requires `casual-lib' which in turn requires an update of
+;; the built-in package `transient' ≥ 0.6.0. Please customize the variable
+;; `package-install-upgrade-built-in' to t to allow for `transient' to be
+;; updated. For further details, consult the INSTALL section of this package's
+;; README.
 
 ;;; Code:
 (require 'dired)
