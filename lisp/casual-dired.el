@@ -5,7 +5,7 @@
 ;; Author: Charles Choi <kickingvegas@gmail.com>
 ;; URL: https://github.com/kickingvegas/casual-dired
 ;; Keywords: tools
-;; Version: 1.8.1
+;; Version: 1.8.2
 ;; Package-Requires: ((emacs "29.1") (casual-lib "1.1.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -126,7 +126,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :up-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :file)))
      :transient t)
 
@@ -135,7 +135,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :down-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :file)))
      :transient t)
     ("M-p" " ↑ 📁" dired-prev-dirline
@@ -144,7 +144,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :up-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :directory)))
      :transient t)
     ("M-n" " ↓ 📁" dired-next-dirline
@@ -153,7 +153,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :down-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :directory)))
      :transient t)
     ("[" " ↑ 🗂️" dired-prev-subdir
@@ -162,7 +162,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :up-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :subdir)))
      :transient t)
     ("]" " ↓ 🗂️" dired-next-subdir
@@ -171,7 +171,7 @@
                     (format "%s %s"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :down-arrow)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :subdir)))
      :transient t)
     ("j" " → 📄…" dired-goto-file
@@ -179,7 +179,7 @@
                     (format "%s %s…"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :goto)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :file)))
      :transient t)
     ("M-j" " → 🗂️…" dired-goto-subdir
@@ -187,7 +187,7 @@
                     (format "%s %s…"
                             (casual-dired-format-arrow
                              (casual-dired-unicode-get :goto)
-                             casual-dired-use-unicode-symbols)
+                             casual-lib-use-unicode)
                             (casual-dired-unicode-get :subdir)))
      :transient t)]]
 
