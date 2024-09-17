@@ -6,7 +6,7 @@ An opinionated [[https://github.com/magit/transient][Transient]]-based user inte
 [[file:docs/images/casual-dired-screenshot.png]]
 
 * Motivation
-While highly functional, Dired has a steep learning curve as it relies on single-key bindings for many of its commands. Menus are a user interface (UI) affordance that offer users discoverability and recall that can lower Dired's learning curve. While menus are commonly associated with mouse-driven UI, the inclusion of Transient in Emacs core allows for a menu UI that is keyboard-driven. Casual Dired endeavors to offer this as many Emacs users prefer keyboard-driven workflows.
+While highly functional, Dired has a steep learning curve as it relies on single-key bindings for many of its commands. Menus are a user interface (UI) affordance that offer users discoverability and recognition that can lower Dired's learning curve. While menus are commonly associated with mouse-driven UI, the inclusion of Transient in Emacs core allows for a menu UI that is keyboard-driven. Casual Dired endeavors to offer this as many Emacs users prefer keyboard-driven workflows.
 
 ** Goals
 - To provide a keyboard-driven menu UI to Dired.
