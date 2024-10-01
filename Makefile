@@ -50,8 +50,8 @@ TIMESTAMP := $(shell /bin/date "+%Y%m%d_%H%M%S")
 VERSION := $(shell ./scripts/read-version.sh $(MAIN_EL))
 # BUMP_LEVEL: major|minor|patch|prerelease|build
 BUMP_LEVEL=patch
-VERSION_BUMP := $(shell python -m semver nextver $(VERSION) $(BUMP_LEVEL))
-VERSION_PRERELEASE := $(shell python -m semver nextver $(VERSION) prerelease)
+VERSION_BUMP := $(shell python -m semver bump $(BUMP_LEVEL) $(VERSION))
+VERSION_LAST_TAG := $(shell git tag --sort=-creatordate | head -n 1)
 
 .PHONY: tests					\
 create-pr					\
@@ -77,7 +77,7 @@ bump-casual:
 	sed -i 's/;; Version: $(VERSION)/;; Version: $(VERSION_BUMP)/' $(MAIN_EL)
 	sed -i 's/(defconst casual-dired-version "$(VERSION)"/(defconst casual-dired-version "$(VERSION_BUMP)"/' $(VERSION_EL)
 
-bump: checkout-development bump-casual
+bump: bump-casual
 	git commit -m 'Bump version to $(VERSION_BUMP)' $(MAIN_EL) $(VERSION_EL)
 	git push
 
@@ -96,11 +96,9 @@ checkout-main:
 sync-development-with-main: checkout-main checkout-development
 	git merge main
 
-new-sprint: sync-development-with-main
-	sed -i 's/;; Version: $(VERSION)/;; Version: $(VERSION_PRERELEASE)/' $(MAIN_EL)
-	sed -i 's/(defconst casual-version "$(VERSION)"/(defconst casual-version "$(VERSION_PRERELEASE)"/' $(MAIN_EL)
-	git commit -m 'Bump version to $(VERSION_PRERELEASE)' $(MAIN_EL)
-	git push
+
+new-sprint: VERSION_BUMP:=$(shell python -m semver nextver $(VERSION) prerelease)
+new-sprint: sync-development-with-main bump
 
 create-merge-development-branch: checkout-development
 	git checkout -b merge-development-to-main-$(TIMESTAMP)
@@ -114,17 +112,18 @@ create-patch-pr:
 	gh pr create --base main --fill
 
 ## Create GitHub pull request for release
-create-release-pr: create-merge-development-branch bump
+create-release-pr: create-merge-development-branch
 	gh pr create --base main \
 --title "Merge development to main $(TIMESTAMP)" \
 --fill-verbose
 
-create-release-tag: checkout-main
-	git tag $(VERSION)
-	git push origin $(VERSION)
+create-release-tag: checkout-main bump
+	git tag $(VERSION_BUMP)
+	git push origin $(VERSION_BUMP)
 
+create-gh-release: VERSION_BUMP:=$(shell python -m semver nextver $(VERSION) $(BUMP_LEVEL))
 create-gh-release: create-release-tag
-	gh release create -t v$(VERSION) --notes-from-tag $(VERSION)
+	gh release create -t v$(VERSION_BUMP) --generate-notes
 
 status:
 	git status
