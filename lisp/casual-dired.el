@@ -23,6 +23,12 @@
 
 ;;; Commentary:
 
+;; NOTICE
+;; This package `casual-dired' has been superseded by the package `casual'.
+;; Please update to the `casual' package from either MELPA or MELPA stable. Upon
+;; installation and upgrade of the `casual' package, this package will be
+;; removed.
+
 ;; Casual Dired is an opinionated Transient-based user interface for Emacs Dired.
 
 ;; INSTALLATION
@@ -56,6 +62,13 @@
 (require 'casual-dired-variables)
 (require 'casual-dired-settings)
 (require 'casual-dired-utils)
+
+(display-warning
+ :warning
+ (concat
+  "NOTICE: "
+  "The package casual-dired has been superseded by the package casual. "
+  "Please upgrade to casual at your earliest convenience."))
 
 ;;; Menus
 ;;;###autoload (autoload 'casual-dired-tmenu "casual-dired" nil t)
